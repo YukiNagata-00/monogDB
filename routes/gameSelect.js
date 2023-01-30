@@ -1,16 +1,14 @@
 const express = require("express");
 const router = express.Router()
+const {
+    getFoods, 
+    getStart,
+    getResult
+} = require('../controllers/selectGame')
 
-
-router.get('/start', (req, res) => {
-    res.render('../views/quiz/templates/intro.ejs');
-});
-router.get('/playing', (req, res) => {
-    res.render('../views/quiz/select/playing.ejs');
-});
-router.get('/result', (req, res) => {
-    res.render('../views/quiz/templates/result.ejs');
-});
+router.get('/start', getStart);
+router.get('/playing', getFoods);
+router.get('/result', getResult);
 
 
 module.exports = router;

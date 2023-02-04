@@ -5,18 +5,25 @@ const getStart = (req, res, next) =>{
     res.render('quiz/templates/intro.ejs');
 }
 const getReady = async(req, res, next) =>{
-    console.log("ready")
-        try{
-        const foods = await Food.find({});
-        console.log(foods)
-        res.render('../views/quiz/select/playing.ejs', { foodData: foods })
+
+    try{
+        Food.aggregate([
+            { $sample: { size: 10 } }
+        ], (err, foods) => {
+            console.log(foods);
+            res.redirect(`/game/select/playing?foods=${foods}`);
+        });
+        //const foods = await Food.find({});
+        // res.redirect(`/game/select/playing?foods=${foods}`);
     }catch (err){
         console.log("failed")
     }
-    
+
+
 }
 const getPlaying = (req, res, next) =>{
-    res.render('quiz/select/playing.ejs');
+    const foods = req.query.foods;
+    res.render('quiz/select/playing.ejs', { foods: foods });
 }
 const getResult = (req, res, next) =>{
     res.render('quiz/templates/result.ejs');

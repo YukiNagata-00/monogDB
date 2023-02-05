@@ -4,17 +4,15 @@ const Food = require("../models/Food")
 const getStart = (req, res, next) =>{
     res.render('quiz/templates/intro.ejs');
 }
-const getReady = async(req, res, next) =>{
+const getReady = (req, res, next) =>{
 
     try{
         Food.aggregate([
             { $sample: { size: 10 } }
         ], (err, foods) => {
             console.log(foods);
-            res.redirect(`/game/select/playing?foods=${foods}`);
+            res.redirect(`/game/select/playing?foods=${JSON.stringify(foods)}`);
         });
-        //const foods = await Food.find({});
-        // res.redirect(`/game/select/playing?foods=${foods}`);
     }catch (err){
         console.log("failed")
     }
@@ -23,7 +21,7 @@ const getReady = async(req, res, next) =>{
 }
 const getPlaying = (req, res, next) =>{
     const foods = req.query.foods;
-    res.render('quiz/select/playing.ejs', { foods: foods });
+    res.render('quiz/select/playing.ejs');
 }
 const getResult = (req, res, next) =>{
     res.render('quiz/templates/result.ejs');

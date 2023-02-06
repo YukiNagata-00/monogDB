@@ -3,6 +3,7 @@ const Food = require("../models/Food")
 
 const getStart = (req, res, next) =>{
     res.render('quiz/templates/intro.ejs');
+    res.sendFile(path.join(__dirname, '../public', 'html/index.html'));
 }
 const getReady = async(req, res, next) =>{
 

@@ -2,14 +2,16 @@
 const express = require('express');
 const app = express();
 const router = express.Router();
+var path = require('path');
 
-
-router.get('/', (req, res) => {
-    res.render('../views/top/index.ejs');
+/* GET index page. */
+router.get('/', function(req, res, next) {
+    res.sendFile(path.join(__dirname, '../public', 'html/index.html'));
 });
 
+/* GET home page. */
 router.get('/home', (req, res) => {
-    res.render('../views/home/index.ejs');
+    res.sendFile(path.join(__dirname, '../public', 'html/home.html'));
 });
 
 

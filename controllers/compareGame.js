@@ -1,39 +1,47 @@
 const Food = require("../models/Food")
-
+var path = require('path');
 
 const getStart = (req, res, next) =>{
-    res.render('quiz/templates/intro.ejs');
-    res.sendFile(path.join(__dirname, '../public', 'html/index.html'));
+    res.sendFile(path.join(__dirname, '../public', 'html/compare/compareStart.html'));
 }
-const getReady = async(req, res, next) =>{
+//多分使わない？
+// const getReady = (req, res, next) =>{
 
-    // try{
-    //     Food.aggregate([
-    //         { $sample: { size: 10 } }
-    //     ], (err, foods) => {
-    //         console.log(foods);
-    //         res.redirect(`/game/select/playing?foods=${foods}`);
-    //     });
-    //     //const foods = await Food.find({});
-    //     // res.redirect(`/game/select/playing?foods=${foods}`);
-    // }catch (err){
-    //     console.log("failed")
-    // }
+//     try{
+//         Food.aggregate([
+//             { $sample: { size: 10 } }
+//         ], (err, foods) => {
+//             console.log(foods);
+//             res.redirect(`/game/select/playing?foods=${JSON.stringify(foods)}`);
+//         });
+//     }catch (err){
+//         console.log("failed")
+//     }
+// }
 
-
-}
-const getPlaying = (req, res, next) =>{
-    const foods = req.query.foods;
-    res.render('quiz/compare/playing.ejs', { foods: foods });
-}
-const getResult = (req, res, next) =>{
-    res.render('quiz/templates/result.ejs');
-}
+    const getFood =  (req, res) => {
+        Food.aggregate([{ $sample: { size: 10 } }])
+        .then((questions) => {
+            console.log(questions)
+            res.json(questions);
+        })
+        .catch((error) => {
+            console.log(error);
+            res.send('An error occured');
+        });
+    };
+    const getPlay = (req, res, next) =>{
+        res.sendFile(path.join(__dirname, '../public', 'html/compare/comparePlay.html'));
+    }
+    const getResult = (req, res, next) =>{
+        res.render('quiz/templates/result.ejs');
+    }
 
 
 module.exports = {
     getStart,
+    //getReady,
+    getFood,
+    getPlay,
     getResult,
-    getReady,
-    getPlaying,
 };

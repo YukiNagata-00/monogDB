@@ -2,16 +2,22 @@ const express = require("express");
 const router = express.Router()
 const {
     getStart,
-    getReady,
+    // getReady,
+    getFood,
     getPlay,
-    getPlaying,
     getResult
 } = require('../controllers/selectGame')
 
+/*
+ex)
 router.get('/start', getStart);
-router.get('/getReady', getReady);
+-> url /game/select/start の時、controllers/selectGame.jsの "getStart"の処理をする。
+*/
+
+router.get('/start', getStart);
+//router.get('/getReady', getReady);
+router.get('/getFood', getFood);
 router.get('/play', getPlay);
-router.get('/playing', getPlaying);
 router.get('/result', getResult);
 
 

@@ -2,7 +2,7 @@ const Food = require("../models/Food")
 var path = require('path');
 
 const getStart = (req, res, next) =>{
-    res.sendFile(path.join(__dirname, '../public', 'html/select/selectStart.html'));
+    res.sendFile(path.join(__dirname, '../public', 'select/selectStart.html'));
 }
 //多分使わない？
 // const getReady = (req, res, next) =>{
@@ -31,7 +31,7 @@ const getStart = (req, res, next) =>{
         });
     };
     const getPlay = (req, res, next) =>{
-        res.sendFile(path.join(__dirname, '../public', 'html/select/selectPlay.html'));
+        res.sendFile(path.join(__dirname, '../public', 'select/selectPlay.html'));
     }
     const getResult = (req, res, next) =>{
         res.render('quiz/templates/result.ejs');

@@ -6,22 +6,10 @@ body{
     
     background: #FDE8DC
 }
-.card{
-    position: absolute;
-    align-items: center;
-    width: 755px;
-    height: 477px;
-    left: 266px;
-    top: 118px;
 
-    background: #FFFFFF;
-    box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.25);
-    border-radius: 40px;
-}
 .left-button{
     position: absolute;
     width: 340px;
-    height: 91px;
     left: 266px;
     top: 647px;
     

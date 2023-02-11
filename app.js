@@ -3,7 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const gameSelectRoutes = require('./routes/gameSelect')
 const gameCompareRoutes = require('./routes/gameCompare')
-const gameFlashcardRoutes = require('./routes/gameFlashcard')
+//const gameFlashcardRoutes = require('./routes/gameFlashcard')
 const indexRoutes = require('./routes/index');
 
 app.use(express.static(__dirname + "/public"));
@@ -29,6 +29,6 @@ app.set('view engine', "ejs")
 app.use('/', indexRoutes);
 app.use("/game/select", gameSelectRoutes);
 app.use("/game/compare", gameCompareRoutes);
-app.use("/game/flashcard", gameFlashcardRoutes);
+//app.use("/game/flashcard", gameFlashcardRoutes);
 
 

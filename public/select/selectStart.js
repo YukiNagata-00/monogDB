@@ -7,12 +7,12 @@
 
 
     document.querySelector('#start').addEventListener('click', function () {
-        fetch('../../controllers/selectGame.js/getFood')
+        fetch('/game/select/getFood')
             .then(response => response.json())
             .then(data => {
                 console.log('success');
                 localStorage.setItem("questions", JSON.stringify(data));
-               // window.location.href = "/game/select/play";
+                window.location.href = "/game/select/play";
             })
             .catch(error => console.error(error));
     });

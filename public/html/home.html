@@ -1,12 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,600,1,0" />
+    <script src="../../public/html/home.js"></script>
+    <title>Home</title>
+    <style>
+        body {
+            background-color: #FFF9EB;
+
+            color: #392E28;
+            text-align: center;
+
+
+        }
+
+        h1 {
+            font-size: 38px;
+        }
+    </style>
 </head>
+
 <body>
-    home
+    <div>
+        <div style="max-width:90%; margin:0 auto;" class="  w3-padding">
+            <h1 style="float:left;"><b>Carbomeee</b></h1>
+            <span id="settingBtn" style="float:right; font-size:33px" class="w3-margin material-symbols-outlined">
+                settings
+            </span>
+        </div>
+
+
+
+        <div style="max-width:70%; margin:0 auto;" class="w3-row">
+            <div class="w3-col l1">
+                <br>
+            </div>
+            <div id="selectBtn" style="max-width:80%; border-radius: 35px;background-color: #FDC988;
+                " class="w3-col l3 w3-button w3-hover-white w3-margin">
+
+                <h2 class="w3-margin" style="font-size:27px;">選択</h2>
+            </div>
+
+
+            <div id="compareBtn" class="w3-col l3 w3-button w3-hover-white w3-margin"
+                style="max-width:80%;  border-radius: 35px;background-color:#C1DEBB;">
+                <h2 class="w3-margin" style="font-size:27px;">比較</h2>
+            </div>
+
+
+            <div id="flashcardBtn" class="w3-col l3 w3-button w3-hover-white w3-margin"
+                style="max-width:80%;  border-radius: 35px;background-color:#E8C5B2;">
+                <h2 class="w3-margin" style="font-size:27px;">練習</h2>
+            </div>
+
+
+            <script>
+                let select= document.getElementById("selectBtn")
+                select.addEventListener('click', function () {
+
+                    console.log("select button clicked")
+                    window.location.href = '../../public/select/selectStart.html';
+                    
+                })
+            </script>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
 </body>
+
 </html>

@@ -23,14 +23,18 @@
 </head>
 
 <body>
-    <span id="closeBtn" style='font-size:36px; position:absolute;'
+    <div id="back" >
+        <span style='font-size:36px; position:absolute;'
         class="material-symbols-outlined w3-button w3-hover-none w3-left-align w3-margin">
         arrow_back
     </span>
+    </div>
+    
+     
 
     <div style="text-align: center;">
-<br>
-        <h1 class="w3-margin w3-padding" style="font-weight: 500;
+        <br>
+        <h1 id="test" class="w3-margin w3-padding" style="font-weight: 500;
         font-size: 70px;">選択ゲーム</h1>
         <br>
 
@@ -43,15 +47,30 @@
         <br><br>
 
         <div id="start" style="border-radius: 30px;"
-        class="w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border-orange  w3-button w3-hover-none w3-margin" >
+            class="w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border-orange  w3-button w3-hover-none w3-margin">
 
-            <h3 style="font-size:27px;" class=""><b>    START</b></h3>
+            <h3 style="font-size:27px;" class=""><b> START</b></h3>
         </div>
-       
+
 
     </div>
 
+    <script>
+        window.onload = function () {
+            let go = document.getElementById("back")
+            go.addEventListener('click', function () {
+        
+                console.log("back button clicked")
+                window.location.href = '../../public/html/home.html';
+        
+            })
 
+            
+        }
+
+        
+        
+    </script>
 
 
 </body>

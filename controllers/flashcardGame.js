@@ -7,14 +7,12 @@ const getStart = (req, res, next) =>{
 
 
     const getFood =  (req, res) => {
-        Food.aggregate([{ $sample: { size: 10 } }])
-        .then((questions) => {
-            console.log(questions)
-            res.json(questions);
-        })
-        .catch((error) => {
-            console.log(error);
-            res.send('An error occured');
+        Food.find({}).sort({ _id: 1 }).exec((err, food) => {
+            if (err) {
+            console.log(err);
+            res.status(500).send({ error: 'An error occurred' });
+            }
+            res.json(food);
         });
     };
 

@@ -30,10 +30,5 @@ app.set('view engine', "ejs")
 app.use('/', indexRoutes);
 app.use("/game/select", gameSelectRoutes);
 app.use("/game/compare", gameCompareRoutes);
-<<<<<<< HEAD
-//app.use("/game/flashcard", gameFlashcardRoutes);
 
-=======
-app.use("/game/flashcard", gameFlashcardRoutes);
->>>>>>> a56aa122562bbcbae634a8ee5aaf755a3df5472e
 

@@ -10,31 +10,59 @@ body{
        "...   arrow1  arrow2 ..."  1fr 
        "footer footer footer  footer" 1fr/
        2fr 2fr 2fr  2fr;;
-}
-
-header{
- 
+  }
+  
+  header{
+  
     grid-area: header;
-}
-
-main{
+  }
+  .scene card{
+    border: 1px solid #CCC;
+    perspective: 600px;
+    position: relative;
+  }
+  .card{
     border-radius: 20px;
     background-color:white;
     grid-area: main;
     margin: 10px;
     text-align:center;
     max-height:400px;
-    
-   
-    
-}
-h1{
-    text-align:center
-}
-
-
-.arrow-left{
-
+    transition: transform 1s;
+    transform-style: preserve-3d;
+    cursor: pointer;    
+  }
+  
+  main.is-flipped {
+    transform: rotateY(180deg);
+  }
+  
+  h1{
+    text-align:center;
+  }
+  .card-main-omote, .card-main-ura{
+    backface-visibility: hidden; /*裏向きを非表示*/
+    -webkit-backface-visibility: hidden;
+  
+  }
+  
+  
+  .card-main-ura{
+  
+    position:absolute;
+    font-size:30px;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:white;
+    text-align:center;
+  
+  
+    transform: rotateY( 180deg );
+  }
+  
+  .arrow-left{
+  
     margin: 10px;
     padding:15px;
     border-radius: 20px;
@@ -44,13 +72,13 @@ h1{
     place-items: center;
     transition: all .2s;
     
-}
-.arrow-left:hover{
+  }
+  .arrow-left:hover{
     background-color: #ffca57;
   }
-
- .arrow-right{
-
+  
+  .arrow-right{
+  
     margin: 10px;
     padding:15px;
     border-radius: 15px;
@@ -59,8 +87,9 @@ h1{
     text-align:center;
     place-items: center;
     transition: all .2s;
-}
-.arrow-right:hover{
+  }
+  .arrow-right:hover{
     background-color: #ffca57;
   }
-
+  
+  

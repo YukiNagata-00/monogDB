@@ -6,6 +6,7 @@ window.onload = function() {
     const cards = JSON.parse(localStorage.getItem("cards"));
     console.log(cards)
 };
+//flip するためのcode//
 var card = document.querySelector('.card');
 card.addEventListener( 'click', function() {
   card.classList.toggle('is-flipped');

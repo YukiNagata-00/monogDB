@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 
 /**
  * このファイルを読み込むとき、LocalStrageに格納されているFoodデータをコンソールに表示する
@@ -15,6 +16,10 @@
     let result = [];
     let point = 0;
     updateQuestion();
+
+    document.getElementById('closeBtn').addEventListener('click', function(){
+        window.location.href = "/home";
+    })
 
 
     options.forEach(function(element) {

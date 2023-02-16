@@ -17,3 +17,11 @@
             .catch(error => console.error(error));
     });
 
+    window.onload = function () {
+        document.getElementById("back").addEventListener('click', function () {
+            window.location.href = '/home';
+
+        })
+
+
+    }

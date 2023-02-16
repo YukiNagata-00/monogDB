@@ -9,7 +9,7 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,600,1,0" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/select/selectPlay.css">
-    <title>Document</title>
+    <title>selectPlay</title>
     <style>
         body {
             background-color: #FFF3D8;
@@ -38,18 +38,18 @@
                 <div class="w3-col l1">
                     <br>
                 </div>
-                <div class="w3-button w3-hover-white w3-col l3 w3-margin"
+                <div id="option1" class="w3-button w3-hover-white w3-col l3 w3-margin"
                     style=" border-radius: 20px;background-color:#FFF3D8;">
 
-                    <h2 style="font-size:27px;" id="option1" class="option option1">1</h2>
+                    <h2 style="font-size:27px;" class="option">1</h2>
                 </div>
-                <div class="w3-button w3-hover-white w3-col l3 w3-margin"
+                <div id="option2"  class="w3-button w3-hover-white w3-col l3 w3-margin"
                     style="border-radius: 20px;background-color:#FFF3D8;">
-                    <h2 style="font-size:27px;" id="option2" class="option">2</h2>
+                    <h2 style="font-size:27px;" class="option">2</h2>
                 </div>
-                <div class="w3-button w3-hover-white w3-col l3 w3-margin"
+                <div id="option3" class="w3-button w3-hover-white w3-col l3 w3-margin"
                     style="border-radius: 20px;background-color:#FFF3D8;">
-                    <h2 style="font-size:27px;" id="option3" class="option">3</h2>
+                    <h2 style="font-size:27px;"  class="option">3</h2>
                 </div>
 
             </div>
@@ -61,9 +61,11 @@
 
 
     </div>
-    <div id="after_answer">
-        <div id="comment">comment</div>
-        <div id="next">Next</div>
+    <div id="after_answer" class="w3-padding">
+        <h3 id="comment" style="position:relative;top:75px; text-align: center; max-width:30%; margin:0 auto;">comment</h3>
+        <span id="next" style="font-size:40px; float:right;right:80px;position:relative" class=" material-symbols-outlined w3-button w3-hover-none w3-margin w3-padding">
+            arrow_forward
+            </span>
     </div>
     
 <script src="/select/selectPlay.js"></script>

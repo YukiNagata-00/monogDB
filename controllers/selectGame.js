@@ -34,7 +34,7 @@ const getStart = (req, res, next) =>{
         res.sendFile(path.join(__dirname, '../public', '/select/selectPlay.html'));
     }
     const getResult = (req, res, next) =>{
-        res.render('quiz/templates/result.ejs');
+        res.sendFile(path.join(__dirname, '../public', '/html/gameResult.html'));
     }
 
 

@@ -7,11 +7,8 @@ window.onload = function() {
     console.log(questions)
 };
 
-window.onload = function () {
+
     document.getElementById("closeBtn").addEventListener('click', function () {
         window.location.href = '/home';
 
     })
-
-
-}

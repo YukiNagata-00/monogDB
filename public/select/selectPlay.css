@@ -1,6 +1,6 @@
 .miss{
-    border:1px solid red;
+    border:2px solid #cc0000
 }
 .correct{
-    border:1px solid green;
+    border:2px solid #006600 
 }

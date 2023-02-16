@@ -2,10 +2,16 @@ window.onload = function () {
 
     let select = document.getElementById("selectBtn")
     select.addEventListener('click', function () {
-        console.log("select button clicked")
         window.location.href = '/game/select/start';
 
     })
+
+    let compare = document.getElementById("compareBtn")
+    compare.addEventListener('click', function () {
+        window.location.href = '/game/compare/start';
+
+    })
+
     
     document.querySelector('#flashcard_start').addEventListener('click', function() {
     fetch('/game/flashcard/getFood')

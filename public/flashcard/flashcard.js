@@ -4,10 +4,14 @@
  */
 window.onload = function() {
     const cards = JSON.parse(localStorage.getItem("cards"));
-    console.log(cards)
+    console.log(cards);
+
 };
-//flip するためのcode//
+//クリックするとflip するためのcode//
 var card = document.querySelector('.card');
 card.addEventListener( 'click', function() {
   card.classList.toggle('is-flipped');
 });
+
+
+

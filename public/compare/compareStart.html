@@ -1,14 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>compareStart</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,600,1,0" />
+    <script src="../../public/compare/compareStart.js"></script>
+    <style>
+        body {
+            background-color: #FFF9EB;
+
+            color: #392E28;
+
+        }
+    </style>
 </head>
+
 <body>
-    比較ゲーム
-    <button id="start">Start</button>
-    <script src="/compare/compareStart.js"></script>
+    <div id="back" >
+        <span style='font-size:36px; position:absolute;'
+        class="material-symbols-outlined w3-button w3-hover-none w3-left-align w3-margin">
+        arrow_back
+    </span>
+    </div>
+    
+     
+
+    <div style="text-align: center;">
+        <br>
+        <h1 id="test" class="w3-margin w3-padding" style="font-weight: 500;
+        font-size: 70px;">比較ゲーム</h1>
+        <br>
+
+
+        <div style="background-color:#C1DEBB;
+        border-radius: 40px;max-width:50%; margin: 0 auto; height:300px;">
+            <h2 class="w3-margin w3-padding">（ゲームの説明）</h2>
+
+        </div>
+        <br><br>
+
+        <div id="startC" style="border-radius: 30px;"
+            class="w3-topbar w3-bottombar w3-leftbar w3-rightbar w3-border-lightgreen  w3-button w3-hover-none w3-margin">
+
+            <h3 style="font-size:27px;" class=""><b> START</b></h3>
+        </div>
+
+
+    </div>
+
+    <script>
+        window.onload = function () {
+            let go = document.getElementById("back")
+            go.addEventListener('click', function () {
+        
+                console.log("back button clicked")
+                window.location.href = '../../public/html/home.html';
+        
+            })
+
+            
+        }
+
+        
+        
+    </script>
+
+
 </body>
+
 </html>

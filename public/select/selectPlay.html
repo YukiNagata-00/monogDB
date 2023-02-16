@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <script src="/select/selectPlay.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,600,1,0" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/select/selectPlay.css">
     <title>Document</title>
     <style>
         body {
@@ -41,15 +41,15 @@
                 <div class="w3-button w3-hover-white w3-col l3 w3-margin"
                     style=" border-radius: 20px;background-color:#FFF3D8;">
 
-                    <h2 style="font-size:27px;">20g</h2>
+                    <h2 style="font-size:27px;" id="option1" class="option option1">1</h2>
                 </div>
                 <div class="w3-button w3-hover-white w3-col l3 w3-margin"
                     style="border-radius: 20px;background-color:#FFF3D8;">
-                    <h2 style="font-size:27px;">10g</h2>
+                    <h2 style="font-size:27px;" id="option2" class="option">2</h2>
                 </div>
                 <div class="w3-button w3-hover-white w3-col l3 w3-margin"
                     style="border-radius: 20px;background-color:#FFF3D8;">
-                    <h2 style="font-size:27px;">15g</h2>
+                    <h2 style="font-size:27px;" id="option3" class="option">3</h2>
                 </div>
 
             </div>
@@ -60,11 +60,13 @@
 
 
 
-
     </div>
-
-
-
+    <div id="after_answer">
+        <div id="comment">comment</div>
+        <div id="next">Next</div>
+    </div>
+    
+<script src="/select/selectPlay.js"></script>
 </body>
 
 </html>

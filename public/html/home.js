@@ -19,7 +19,7 @@ window.onload = function () {
     .then(data => {
         console.log('success');
         localStorage.setItem("cards", JSON.stringify(data));
-        window.location.href = "/game/flashcard/";
+        window.location.href = "/game/flashcard/start";
     })
     .catch(error => console.error(error));
     });

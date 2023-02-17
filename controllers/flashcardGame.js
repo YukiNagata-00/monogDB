@@ -2,7 +2,7 @@ const Food = require("../models/Food")
 var path = require('path');
 
 const getStart = (req, res, next) =>{
-    res.sendFile(path.join(__dirname, '../public', '/flashcard/flashcard.html'));
+    res.sendFile(path.join(__dirname, '../public', '/flashcard/flashStart.html'));
 }
 
 
@@ -15,11 +15,14 @@ const getStart = (req, res, next) =>{
             res.json(food);
         });
     };
+const getPlay = (req, res, next) =>{
+    res.sendFile(path.join(__dirname, '../public', '/flashcard/flashcard.html'));
+}
 
 module.exports = {
     getStart,
     //getReady,
     getFood,
-    // getPlay,
+    getPlay,
     // getResult,
 };

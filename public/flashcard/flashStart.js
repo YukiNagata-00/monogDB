@@ -1,8 +1,8 @@
 window.onload = function () {
 
-    let select = document.getElementById("selectBtn")
-    select.addEventListener('click', function () {
-        window.location.href = '/game/select/start';
+    let all = document.getElementById("allBtn")
+    all.addEventListener('click', function () {
+        window.location.href = '/game/flashcard/play';
 
     })
 
@@ -19,7 +19,7 @@ window.onload = function () {
     .then(data => {
         console.log('success');
         localStorage.setItem("cards", JSON.stringify(data));
-        window.location.href = "/game/flashcard/start";
+        window.location.href = "/game/flashcard/play";
     })
     .catch(error => console.error(error));
     });

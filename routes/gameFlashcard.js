@@ -3,11 +3,13 @@ const router = express.Router();
 const {
     getStart,
     getFood,
+    getPlay,
 } = require('../controllers/flashcardGame');
 
 
 
-router.get('/', getStart);
+router.get('/start', getStart);
 router.get('/getFood', getFood);
+router.get('/play', getPlay);
 
 module.exports = router;

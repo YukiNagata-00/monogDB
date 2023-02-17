@@ -14,6 +14,12 @@ card.addEventListener( 'click', function() {
   card.classList.toggle('is-flipped');
 });
 
+let back = document.getElementById("back")
+back.addEventListener('click', function () {
+    window.location.href = '/game/flashcard/start';
+
+})
+
 //右矢印をクリックしたら次のカードへうつる
 arrowRight.addEventListener('click', function(){
   index ++;

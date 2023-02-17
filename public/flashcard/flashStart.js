@@ -1,10 +1,15 @@
 window.onload = function () {
+    let back = document.getElementById("back");
+    back.addEventListener('click', function () {
+        window.location.href = '/home';
+
+    });
 
     let all = document.getElementById("allBtn")
     all.addEventListener('click', function () {
         window.location.href = '/game/flashcard/play';
 
-    })
+    });
 
     let compare = document.getElementById("compareBtn")
     compare.addEventListener('click', function () {

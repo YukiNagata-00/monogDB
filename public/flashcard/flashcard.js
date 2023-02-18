@@ -1,5 +1,5 @@
 
-let foodName = document.getElementById("foodName");
+
 let foodImg = document.getElementById("foodImg");
 let arrowRight = document.getElementById("arrow-right");
 let arrowLeft = document.getElementById("arrow-left");
@@ -20,10 +20,13 @@ back.addEventListener('click', function () {
 
 })
 
+let foodName = document.getElementById("foodName");
+let ura = document.getElementById("ura");
 //右矢印をクリックしたら次のカードへうつる
 arrowRight.addEventListener('click', function(){
   index ++;
   foodName.innerText =cards[index].name ;
+  ura.innerText =cards[index].carbo ;
   //foodImg.src = cards[index].img;
 
 });
@@ -32,6 +35,7 @@ arrowRight.addEventListener('click', function(){
 arrowLeft.addEventListener('click', function(){
   index --;
   foodName.innerText =cards[index].name ;
+  ura.innerText =cards[index].carbo ;
   //foodImg.src = cards[index].img;
 
 });

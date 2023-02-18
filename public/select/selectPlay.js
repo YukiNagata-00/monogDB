@@ -7,7 +7,7 @@
     let index =0;
     const questions = JSON.parse(localStorage.getItem("questions"));
     const foodName = document.getElementById('foodName');
-   // const foodImg = document.getElementById('foodImg');
+    const foodImg = document.getElementById('foodImg');
     const options = document.querySelectorAll('.option');
     const afterAnswerArea = document.getElementById('after_answer');
     const comment = document.getElementById('comment');
@@ -77,7 +77,7 @@
 function updateQuestion(){
     console.log(questions[index])
     foodName.innerText = questions[index].name;
-    //foodImg.src = questions[index].image;
+    foodImg.src = '/images/foods/'+questions[index].image;
     let fakeOptions = generateRandomNumbers(questions[index].carbo);
     fakeOptions.push(questions[index].carbo)
     fakeOptions.sort(function() {

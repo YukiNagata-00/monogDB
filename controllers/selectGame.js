@@ -33,7 +33,14 @@ const getStart = (req, res, next) =>{
     const getPlay = (req, res, next) =>{
         res.sendFile(path.join(__dirname, '../public', '/select/selectPlay.html'));
     }
-    const getResult = (req, res, next) =>{
+    const postScore=(req, res)=>{
+        score = req.body.score;
+        res.sendStatus(200);
+    }
+    const getScore=(req, res)=>{
+        res.send({ score: score });
+    }
+    const getResult = (req, res) =>{
         res.sendFile(path.join(__dirname, '../public', '/html/gameResult.html'));
     }
 
@@ -43,5 +50,7 @@ module.exports = {
     //getReady,
     getFood,
     getPlay,
+    postScore,
+    getScore,
     getResult,
 };

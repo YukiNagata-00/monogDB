@@ -5,6 +5,8 @@ const {
     // getReady,
     getFood,
     getPlay,
+    postScore,
+    getScore,
     getResult
 } = require('../controllers/selectGame')
 
@@ -18,6 +20,8 @@ router.get('/start', getStart);
 //router.get('/getReady', getReady);
 router.get('/getFood', getFood);
 router.get('/play', getPlay);
+router.post('/score', postScore);
+router.get('/score', getScore);
 router.get('/result', getResult);
 
 

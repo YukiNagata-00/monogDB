@@ -14,7 +14,7 @@
     const next = document.getElementById('next');
     afterAnswerArea.hidden = true;
     let result = [];
-    let point = 0;
+    let score = 0;
     updateQuestion();
 
     document.getElementById('closeBtn').addEventListener('click', function(){
@@ -36,7 +36,7 @@
 
             if(element.className.includes('correct')){
                 comment.innerText = "正解！";
-                point++;
+                score++;
                 result.push('o');
             }else{
                 comment.innerText = "惜しい！";
@@ -52,11 +52,23 @@
         if(index >= 10){
             console.log('finish');
             console.log(result);
-            console.log(point);
-            window.location.href = "/game/select/result";
+            console.log(score);
+            
+            const params = {method : "POST", headers: {'Content-Type': 'application/json'},body : JSON.stringify({score:score})};
+            fetch('/game/select/score', params)
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = '/game/select/result';
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+                
         }else{
             console.log(result);
-            console.log(point);
+            console.log(score);
             updateQuestion();
         }
         

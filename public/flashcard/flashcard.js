@@ -27,7 +27,7 @@ arrowRight.addEventListener('click', function(){
   index ++;
   foodName.innerText =cards[index].name ;
   ura.innerText =cards[index].carbo ;
-  //foodImg.src = cards[index].img;
+  foodImg.src = cards[index].img;
 
 });
 
@@ -36,7 +36,7 @@ arrowLeft.addEventListener('click', function(){
   index --;
   foodName.innerText =cards[index].name ;
   ura.innerText =cards[index].carbo ;
-  //foodImg.src = cards[index].img;
+  foodImg.src = cards[index].img;
 
 });
 

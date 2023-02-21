@@ -9,6 +9,7 @@ const authRoutes = require('./routes/auth')
 app.use(express.static(__dirname + "/public"));
 app.use(express.static('./views'));
 app.use(express.json());
+require('dotenv').config();
 //DB接続
 // mongoose.connect("mongodb+srv://yukinagats:abc@cluster0.cogxrva.mongodb.net/?retryWrites=true&w=majority"
 // )
@@ -32,4 +33,3 @@ app.use("/game/select", gameSelectRoutes);
 app.use("/game/compare", gameCompareRoutes);
 app.use("/game/flashcard", gameFlashcardRoutes);
 app.use('/auth', authRoutes);
-

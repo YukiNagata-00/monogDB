@@ -11,7 +11,7 @@
     <title>Login</title>
     <style>
         body {
-            background-color: #FFF3D8;
+            background-color: #FFF9EB;
             text-align: center;
             color: #392E28;
         }
@@ -21,49 +21,61 @@
 
 <body>
 
-    <div class="w3-padding" style="max-width:70%; margin: 0 auto;">
-        <h1 class="w3-margin w3-padding" style="font-size:50px;"><b>ログイン</b></h1>
+    <div class="w3-padding" style="max-width:60%; margin: 0 auto;">
+        <h1 class="w3-margin w3-padding-24" style="font-size:50px;"><b>ログイン</b></h1>
+
         <div class="w3-row w3-padding-24">
             <div class="w3-col l5">
-                <h2>Email :</h2>
+                <h2>メール :</h2>
             </div>
             <div class="w3-col l7">
 
-                <input style="max-width:80%;border-radius: 35px; " class="w3-input w3-border" type="text">
+                <input id="emailInput" style="border-width:4px;max-width:80%;border-radius: 35px;top:10px; position:relative;" class="w3-input"
+                    type="text">
+
             </div>
         </div>
 
+        <h4 id="emailMessage" style="color:#C32712;margin:0">   
 
-    </div>
+        </h4>
 
-    <div class="w3-row w3-padding-24" style="max-width:70%; margin: 0 auto;">
-        <div class="w3-col l6">
-            <h2>Password :</h2>
+        <div class="w3-row w3-padding-24">
+            <div class="w3-col l5">
+                <h2>パスワード :</h2>
+            </div>
+            <div class="w3-col l7">
+                <input id="passwordInput" style="border-width:4px;max-width:80%;border-radius: 35px;top:10px; position:relative; "
+                    class="w3-input " type="text">
+            </div>
+
+
         </div>
-        <div class="w3-col l6">
-            <input style="max-width:80%;border-radius: 35px; " class="w3-input w3-border" type="text">
-        </div>
-
-
-    </div>
-    <div id="okay" style="max-width:80%;margin:0 auto; border-radius: 35px;background-color: #FDC988;
+        <h4 id="emailMessage" style="color:#C32712;margin:0"> </h4>
+        <br><br>
+        <div id="okay" style="max-width:100%;margin:0 auto; border-radius: 35px;background-color: #C1DEBB;
                 " class="w3-button w3-hover-white w3-margin">
 
-        <h2 class="w3-margin" style="font-size:27px;">✔️</h2>
-    </div>
-
-    <div class="w3-row w3-padding-24" style="max-width:70%; margin: 0 auto;">
-        <div class="w3-col l5">
-            <h3 class="w3-button w3-hover-none ">Forgot password?</h3>
+            <span class="material-symbols-outlined" style="font-size:35px;">
+                done
+            </span>
+            
         </div>
-        <div class="w3-col l2">
+
+
+        <div class="w3-row w3-padding">
             <br>
-        </div>
-        <div class="w3-col l5">
-            <h3 class="w3-button w3-hover-none ">Create account</h3>
-        </div>
+            <div class="w3-col l5">
+                <h3 id="forgotButton" class="w3-button w3-hover-none " style="text-decoration: underline;">パスワード忘れた</h3>
+            </div>
+            <div class="w3-col l2">
+                <br>
+            </div>
+            <div class="w3-col l5">
+                <h3 id="createButton"class="w3-button w3-hover-none " style="text-decoration: underline;">会員登録</h3>
+            </div>
 
-    </div>
+        </div>
 
     </div>
 

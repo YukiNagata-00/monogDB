@@ -16,6 +16,10 @@ body{
   
     grid-area: header;
   }
+  .backarrow{
+    cursor: pointer;  
+
+  }
   .scene card{
     border: 1px solid #CCC;
     perspective: 600px;

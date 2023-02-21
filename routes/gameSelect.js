@@ -8,7 +8,7 @@ const {
     postScore,
     getScore,
     getResult
-} = require('../controllers/selectGame')
+} = require('../controllers/selectGame');
 
 /*
 ex)

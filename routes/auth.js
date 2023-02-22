@@ -6,7 +6,8 @@ var path = require('path');
 
 const {
     userRegister,
-    userLogin
+    userLogin,
+    verifyToken
 } = require('../controllers/auth');
 
 router.get('/login', (req, res) => {
@@ -18,5 +19,6 @@ router.get('/signup', (req, res) => {
 
 router.post('/register', userRegister);
 router.post('/login', userLogin);
+router.post('/verify-token', verifyToken);
 
 module.exports = router;

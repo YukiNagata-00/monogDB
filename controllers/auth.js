@@ -2,6 +2,7 @@ const User = require("../models/User");
 const CryptoJS = require('crypto-js');
 const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
+const validation = require('../handlers/validatioin');
 //ユーザー登録API
 const userRegister =  [
     //バリデーション
@@ -29,28 +30,18 @@ const userRegister =  [
             });
         }
     )}),
-    (req, res, next) => {
-        // Finds the validation errors in this request and wraps them in an object with handy functions
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
-        next();
-    },
+    validation.validate,
     async(req, res) =>{
     const password = req.body.password;
     try{
 
         //パスワードハッシュ化
         req.body.password = CryptoJS.SHA256(password);
-        console.log("wwww1");
         //ユーザーの新規作成
         const user = await User.create(req.body);
-        console.log(user);
-        console.log("wwww2")
         //jwt
         const token = jwt.sign({ id: user._id }, process.env.TOKEN_SECRET_KEY,  { expiresIn: '24h' });
-        console.log("wwww3")
+
         return res.status(200).json({user, token});
     }catch(err){
         return res.status(500).json(err);
@@ -58,5 +49,44 @@ const userRegister =  [
 
 },]
 
+//ログインAPI
+const userLogin = [
+    body('email').isEmail().withMessage('正しいメールアドレスを入力してください'),
+    body('password').isLength({min: 5, max: 20 }).withMessage('正しいパスワードを入力してください'),
+    validation.validate,
 
-module.exports = {userRegister};
+    async(req, res)=>{
+        const {email, password} = req.body;
+        try{
+            //DBからemailが一致するものを探す
+            const user = await User.findOne({email: email});
+            if(!user){
+                res.status(401).json({
+                    errors:{
+                        param: 'email',
+                        message: 'emailが無効です'
+                    }
+                })
+            }
+            //passwordチェック
+            const hashedPassword = password.toString(CryptoJS.enc.Hex);
+            if(password !== hashedPassword){
+                res.status(401).json({
+                    errors:{
+                        param: 'password',
+                        message: 'passwordが一致しません'
+                    }
+                })
+            }
+            //jwtの発行
+            const token = jwt.sign({ id: user._id }, process.env.TOKEN_SECRET_KEY,  { expiresIn: '24h' });
+            console.log('login success');
+            return res.status(201).json({user, token});
+        
+        }catch(err){
+            return res.status(500).json(err);
+        }
+    }
+]
+
+module.exports = {userRegister, userLogin};

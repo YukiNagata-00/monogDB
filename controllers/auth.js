@@ -3,6 +3,8 @@ const CryptoJS = require('crypto-js');
 const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
 const validation = require('../handlers/validatioin');
+const tokenHandler = require('../handlers/tokenHandler');
+
 //ユーザー登録API
 const userRegister =  [
     //バリデーション
@@ -89,4 +91,9 @@ const userLogin = [
     }
 ]
 
-module.exports = {userRegister, userLogin};
+//JWT認証API
+const verifyToken =[tokenHandler.verifyToken, (req, res)=>{
+    return res.status(201).json({user: req.user});
+}]
+
+module.exports = {userRegister, userLogin, verifyToken};

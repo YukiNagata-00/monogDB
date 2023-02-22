@@ -27,7 +27,7 @@ const getStart = (req, res, next) =>{
         })
         .catch((error) => {
             console.log(error);
-            res.send('An error occured');
+            res.status(500).json({ error: error.message });
         });
     };
     const getPlay = (req, res, next) =>{

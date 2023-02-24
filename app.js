@@ -11,8 +11,7 @@ app.use(express.static('./views'));
 app.use(express.json());
 require('dotenv').config();
 //DB接続
-// mongoose.connect("mongodb+srv://yukinagats:abc@cluster0.cogxrva.mongodb.net/?retryWrites=true&w=majority"
-// )
+
 mongoose.connect(process.env.MONGO_URL)
 .then(()=>{
     console.log('DB test connencted!!')

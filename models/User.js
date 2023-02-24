@@ -16,8 +16,8 @@ const UserSchema = new mongoose.Schema({
     email2: {
         type: String,
         max: 50,
-        unique: true,
-        default: null
+        index: true,
+        sparse: true
     },
     password: {
         type: String,
@@ -44,5 +44,5 @@ const UserSchema = new mongoose.Schema({
 },
     {timestamps: true}
 );
-
+UserSchema.index({ email2: 1 }, { unique: false });
 module.exports = mongoose.model("User", UserSchema);

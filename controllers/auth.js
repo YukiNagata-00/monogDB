@@ -30,8 +30,8 @@ const userRegister =  [
                 }
                 resolve(true);
             });
-        }
-    )}),
+        });
+    }),
     validation.validate,
     async(req, res) =>{
     const password = req.body.password;
@@ -86,7 +86,12 @@ const userLogin = [
             return res.status(201).json({user, token});
         
         }catch(err){
-            return res.status(500).json(err);
+            res.status(500).json({
+                errors:{
+                    param: 'database',
+                    message: 'データベースエラーが発生しました'
+                }
+            });
         }
     }
 ]

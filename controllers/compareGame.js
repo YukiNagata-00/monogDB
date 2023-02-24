@@ -4,20 +4,6 @@ var path = require('path');
 const getStart = (req, res, next) =>{
     res.sendFile(path.join(__dirname, '../public', '/compare/compareStart.html'));
 }
-//多分使わない？
-// const getReady = (req, res, next) =>{
-
-//     try{
-//         Food.aggregate([
-//             { $sample: { size: 10 } }
-//         ], (err, foods) => {
-//             console.log(foods);
-//             res.redirect(`/game/select/playing?foods=${JSON.stringify(foods)}`);
-//         });
-//     }catch (err){
-//         console.log("failed")
-//     }
-// }
 
     const getFood =  (req, res) => {
         Food.aggregate([{ $sample: { size: 10 } }])
@@ -40,7 +26,6 @@ const getStart = (req, res, next) =>{
 
 module.exports = {
     getStart,
-    //getReady,
     getFood,
     getPlay,
     getResult,

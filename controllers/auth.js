@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const { body, validationResult } = require('express-validator');
 const validation = require('../handlers/validatioin');
 const tokenHandler = require('../handlers/tokenHandler');
-
+const  fetchInstance  = require('./fetchInstance.js');
 //ユーザー登録API
 const userRegister =  [
     //バリデーション

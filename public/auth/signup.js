@@ -1,7 +1,6 @@
 // const  axiosInstance  = require('axiosClient');
 
-/* eslint-disable no-unused-vars */
-console.log('1')
+
 
 let continueBtn = document.getElementById('okay')
 
@@ -29,6 +28,7 @@ continueBtn.addEventListener('click', async function(){
             if (res.ok) {
                 const data = await res.json();
                 console.log('Registration successful', data);
+                localStorage.setItem('jwtToken', data.token);
                 window.location.href = '/home';
             } else {
                 const errorData = await res.json();

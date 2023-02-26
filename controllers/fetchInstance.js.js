@@ -1,3 +1,34 @@
+const getToken = () => {
+    //ローカルストレージに保存したjwtを取り出す
+    //localStorage.getItem('jwtToken');
+    return 1;
+};
+    
+    const fetchInstance = async (url, options = {}) => {
+        console.log('fetchInstance');
+        
+        const headers = {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${getToken()}`,
+        };
+    
+        try {
+            const response = await fetch(url, { ...options, headers });
+            console.log(req);
+            if (!response.ok) {
+                throw new Error(response.statusText);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    };
+    module.exports = {fetchInstance};
+    //export default fetchInstance;
+    
+
+
 //使わないが一応残しておく
 
 // const axios = require('axios').default;

@@ -3,6 +3,7 @@ const { resetWatchers } = require("nodemon/lib/monitor/watch");
 const User = require('../models/User');
 
 exports.verifyToken = async (req, res, next) => {
+    console.log("jet verify");
     const bearerHeader = req.headers['authorization'];
     if (bearerHeader) {
         const bearerToken = bearerHeader.split(' ')[1];

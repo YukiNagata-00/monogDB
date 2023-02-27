@@ -9,6 +9,7 @@ let arrowLeft = document.getElementById("arrow-left");
 let index= 0;
 let foodName = document.getElementById("foodName");
 let ura = document.getElementById("ura");
+let heart = document.getElementById("heart");
 updateCard();
 
 console.log(cards);
@@ -27,7 +28,7 @@ back.addEventListener('click', function () {
 
 
 
-
+//カードを表示させる機能
 function updateCard(){
     foodName.innerText =cards[index].name ;
     ura.innerText =cards[index].carbo ;
@@ -50,6 +51,10 @@ arrowLeft.addEventListener('click', function(){
   foodImg.src = '/images/foods/' +cards[index].image;
 
 });
+
+//heartをクリックしたらuserのfavoriteに追加する
+
+//let addFavorite = 
 
 //ログイン中のユーザー情報取得
 let token = localStorage.getItem('jwtToken');

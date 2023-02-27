@@ -16,21 +16,21 @@
             color: #392E28;
         }
     </style>
-    <link rel="stylesheet" href="flashcard/addFlashcard.css">
+    <link rel="stylesheet" href="./auth/setting.css">
 </head>
 
 <body>
 
     <div class="w3-padding" style="max-width:60%; margin: 0 auto;">
-        <h1 class="w3-padding-24" style="font-size:50px;"><b>カード追加</b></h1>
+        <h1 class="w3-padding-24" style="font-size:50px;"><b>設定画面</b></h1>
 
         <div class="w3-row w3-padding-24">
             <div class="w3-col l5">
-                <h3>食べ物と重さ:</h3>
+                <h3>ユーザー名 :</h3>
             </div>
             <div class="w3-col l7">
 
-                <input id="foodname"
+                <input id="userNameInput"
                     style="border-width:4px;max-width:80%;border-radius: 35px;top:10px; position:relative;"
                     class="w3-input" type="text">
 
@@ -38,11 +38,24 @@
         </div>
         <div class="w3-row w3-padding-24">
             <div class="w3-col l5">
-                <h3>使用したい画像 :</h3>
+                <h3>ログイン用メール :</h3>
             </div>
             <div class="w3-col l7">
 
-                <input id="picture"
+                <input id="emailInput"
+                    style="border-width:4px;max-width:80%;border-radius: 35px;top:10px; position:relative;"
+                    class="w3-input" type="text">
+
+            </div>
+        </div>
+
+        <div class="w3-row w3-padding-24">
+            <div class="w3-col l5">
+                <h3>自分のスコアを送信したいメールアドレス :</h3>
+            </div>
+            <div class="w3-col l7">
+
+                <input id="SendResultEmail"
                     style="border-width:4px;max-width:80%;border-radius: 35px;top:10px; position:relative;"
                     class="w3-input" type="text">
 
@@ -55,7 +68,7 @@
 
         <div class="w3-row w3-padding-24">
             <div class="w3-col l5">
-                <h3>カーボ数 :</h3>
+                <h3>パスワード :</h3>
             </div>
             <div class="w3-col l7">
                 <input id="passwordInput"
@@ -66,7 +79,18 @@
 
         </div>
 
+        <div class="w3-row w3-padding-24">
+            <div class="w3-col l5">
+                <h3>パスワード(確認) :</h3>
+            </div>
+            <div class="w3-col l7">
+                <input id="passwordInput2"
+                    style="border-width:4px;max-width:80%;border-radius: 35px;top:10px; position:relative; "
+                    class="w3-input " type="text">
+            </div>
 
+
+        </div>
 
         <h4 id="emailMessage" style="color:#C32712;margin:0"> </h4>
         <br><br>
@@ -74,17 +98,25 @@
                     " class="w3-button w3-hover-white w3-margin">
 
             <span class="material-symbols-outlined" style="font-size:35px;">
-            done追加
+                done
             </span>
 
         </div>
 
 
+        <div class="w3-row w3-padding">
+        
+            <div class="w3-col l12">
+                <h3 id="createButton" class="w3-button w3-hover-none " style="text-decoration: underline;">
+                  登録  </h3>
+            </div>
+
+        </div>
 
     </div>
 
 
-    <script src="/flashcard/addFlashcard.js"></script>
+    <script src="./auth/setting.js"></script>
 </body>
 
 

@@ -11,6 +11,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,600,1,0" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel ="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="/flashcard/flashcard.css" />
     <title>Document</title>
     <style>
@@ -30,10 +31,80 @@
 <main class = "scene card">
     <div class="card">
     <div class="card-main-omote">
-    <h1 id="foodName">ドーナツ</h1>
+    <div class = "favorite">
+            <label class="heart"><input type="checkbox"><i class="fa fa-heart fa-3x"></i></label>
+     </div>
+    <h1 id="foodName"> </h1> 
+    <!-- <div class="toggle_switch">
+        <input type="checkbox" name="xxx" id="cb_toggle_switch">
+        <label for="cb_toggle_switch"></label>
+    </div>
+     -->
+      
+
+   
+
+    <style>
+        .heart input{
+        display:none;
+       
+        }
+        .heart i{
+        color:gray;
+      
+
+        }
+        .heart input:checked ~ i{
+        color:orange;
+        
+        
+        }
+
+            .toggle_switch {
+                display: table;
+                font-size: 40px;
+            }
+
+            .toggle_switch > input {
+                display: none;
+            }
+
+            .toggle_switch > label {
+                display: block;
+                position: relative;
+                width: 1.8em;
+                height: 1em;
+                border-radius: 1em;
+                background-color: #2b2a2f;
+                cursor: pointer;
+            }
+            .toggle_switch > input:checked + label {
+                background-color: #ffbf52;
+            }
+            .toggle_switch > label::before {
+                position: absolute;
+                top: 0.05em;
+                left: 0.05em;
+                width: calc(1em - 0.1em);
+                height: calc(1em - 0.1em);
+                border-radius: calc(1em - 0.1em);
+                background-color: #fff;
+                transition: 0.5s;
+                content: "";
+            }
+            .toggle_switch > input:checked + label::before {
+                left: calc(100% - 1em + 0.05em);
+            }
+
+        </style>
+       
+        
+
+    
+    
     <img id="foodImg" style="max-width:50%;max-width:300px;" class = "foodpic"
-        src="https://www.freepnglogos.com/uploads/donut-png/onlinelabels-clip-art-rainbow-sprinkles-donut-30.png"
-        alt="donut">
+        src=""
+        alt="foodimg">
 
     </div>
     <div class="card-main-ura" id = "ura">5

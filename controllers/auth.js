@@ -100,5 +100,19 @@ const userLogin = [
 const verifyToken =[tokenHandler.verifyToken, (req, res)=>{
     return res.status(201).json({user: req.user});
 }]
+//add 1 loginCount
+const updateLoginCount = async (req, res) =>{
+    try{
+        const userId = req.body.userId;
+        const user = await User.findById(userId);
+        console.log(user);
+        user.loginCount +=1;
+        await user.save();
+        res.status(200);
 
-module.exports = {userRegister, userLogin, verifyToken};
+    }catch(error){
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
+module.exports = {userRegister, userLogin, verifyToken,updateLoginCount};

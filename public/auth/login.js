@@ -1,3 +1,19 @@
+async function addLoginCounting(data){
+    const loginCountRes = await fetch('/auth/update-login-count', {
+        method: 'POST',
+        body: JSON.stringify({ userId: data.user._id }), 
+        headers: {
+            'Authorization': `Bearer ${data.token}`,
+            'Content-Type': 'application/json'
+        }
+    });
+    
+    if (!loginCountRes.ok) {
+        const errorData = await loginCountRes.json();
+        console.log('Failed to update login count', errorData);
+    }
+}
+
 let token = localStorage.getItem('jwtToken');
     fetch('/auth/verify-token', {
         method: 'POST',
@@ -14,7 +30,8 @@ let token = localStorage.getItem('jwtToken');
     })
     .then(data => {
         console.log(data)
-        window.location.href = '/home'
+        addLoginCounting(data);
+        window.location.href = '/home';
     })
     .catch(error => {
         console.error('Error:', error);
@@ -43,6 +60,7 @@ continueBtn.addEventListener('click', async function(){
                 const data = await res.json();
                 console.log('Registration successful', data);
                 console.log(data.token);
+                addLoginCounting(data);
                 localStorage.setItem('jwtToken', data.token);
                 window.location.href = '/home'; //ホーム画面へ
             } else {

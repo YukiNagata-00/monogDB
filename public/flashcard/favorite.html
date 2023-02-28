@@ -40,68 +40,23 @@
         <label for="cb_toggle_switch"></label>
     </div>
      -->
-      
-
-   
 
     <style>
         .heart input{
         display:none;
-       
         }
         .heart i{
         color:gray;
-      
 
         }
         .heart input:checked ~ i{
         color:orange;
-        
-        
+
         }
-
-            .toggle_switch {
-                display: table;
-                font-size: 40px;
-            }
-
-            .toggle_switch > input {
-                display: none;
-            }
-
-            .toggle_switch > label {
-                display: block;
-                position: relative;
-                width: 1.8em;
-                height: 1em;
-                border-radius: 1em;
-                background-color: #2b2a2f;
-                cursor: pointer;
-            }
-            .toggle_switch > input:checked + label {
-                background-color: #ffbf52;
-            }
-            .toggle_switch > label::before {
-                position: absolute;
-                top: 0.05em;
-                left: 0.05em;
-                width: calc(1em - 0.1em);
-                height: calc(1em - 0.1em);
-                border-radius: calc(1em - 0.1em);
-                background-color: #fff;
-                transition: 0.5s;
-                content: "";
-            }
-            .toggle_switch > input:checked + label::before {
-                left: calc(100% - 1em + 0.05em);
-            }
 
         </style>
        
-        
 
-    
-    
     <img id="foodImg" style="max-width:50%;max-width:300px;" class = "foodpic"
         src=""
         alt="foodimg">

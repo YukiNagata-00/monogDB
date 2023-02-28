@@ -12,6 +12,7 @@ app.use(express.json());
 require('dotenv').config();
 //DB接続
 
+mongoose.set('strictQuery', true);
 mongoose.connect(process.env.MONGO_URL)
 .then(()=>{
     console.log('DB test connencted!!')

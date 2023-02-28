@@ -1,15 +1,21 @@
 
-
-let foodImg = document.getElementById("foodImg");
-let arrowRight = document.getElementById("arrow-right");
-let arrowLeft = document.getElementById("arrow-left");
-let index= 0;
 /**
  * このファイルを読み込むとき、LocalStrageに格納されているFoodデータをコンソールに表示する
  */
 const cards = JSON.parse(localStorage.getItem("cards"));
+let foodImg = document.getElementById("foodImg");
+let arrowRight = document.getElementById("arrow-right");
+let arrowLeft = document.getElementById("arrow-left");
+let index= 0;
+let foodName = document.getElementById("foodName");
+let ura = document.getElementById("ura");
+let heart = document.getElementById("heart");
+updateCard();
+
+console.log(cards);
 //クリックするとflip するためのcode//
 var card = document.querySelector('.card');
+
 card.addEventListener( 'click', function() {
   card.classList.toggle('is-flipped');
 });
@@ -20,14 +26,20 @@ back.addEventListener('click', function () {
 
 })
 
-let foodName = document.getElementById("foodName");
-let ura = document.getElementById("ura");
+
+
+//カードを表示させる機能
+function updateCard(){
+    foodName.innerText =cards[index].name ;
+    ura.innerText =cards[index].carbo ;
+    foodImg.src = '/images/foods/' + cards[index].image; 
+};
 //右矢印をクリックしたら次のカードへうつる
 arrowRight.addEventListener('click', function(){
   index ++;
   foodName.innerText =cards[index].name ;
   ura.innerText =cards[index].carbo ;
-  foodImg.src = cards[index].img;
+  foodImg.src = '/images/foods/' + cards[index].image;
 
 });
 
@@ -36,9 +48,13 @@ arrowLeft.addEventListener('click', function(){
   index --;
   foodName.innerText =cards[index].name ;
   ura.innerText =cards[index].carbo ;
-  foodImg.src = cards[index].img;
+  foodImg.src = '/images/foods/' +cards[index].image;
 
 });
+
+//heartをクリックしたらuserのfavoriteに追加する
+
+//let addFavorite = 
 
 //ログイン中のユーザー情報取得
 let token = localStorage.getItem('jwtToken');

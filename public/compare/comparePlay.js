@@ -30,8 +30,8 @@ const afterAnswerArea = document.getElementById('after_answer');
 const comment = document.getElementById('comment');
 const next = document.getElementById('next');
 afterAnswerArea.hidden = true;
-carb1.hidden= true;
-carb2.hidden= true;
+carb1.hidden = true;
+carb2.hidden = true;
 let result = [];
 let score = 0;
 updateQuestion();
@@ -42,20 +42,29 @@ document.getElementById('closeBtn').addEventListener('click', function () {
 
 
 options.forEach(function (element) {
+
     element.addEventListener("click", function () {
+        let larger;
+        let food1 = questions[index].carbo
+        let food2 = questions[index + 1].carbo
+        if (food1 > food2) {
+            larger = questions[index].name;
+        } else {
+            larger = questions[index + 1].name;
+        }
         carb1.innerText = questions[index].carbo
-        carb2.innerText = questions[index+1].carbo
+        carb2.innerText = questions[index + 1].carbo
 
         //選択肢クリック時に正誤判定し、選択肢に色をつけ、「次へ」ボタンと「コメント」を表示させる。
         options.forEach(elm => {
-            //console.log(elm.innerText)
-            if (parseFloat(elm.innerText) === parseFloat(questions[index].carbo)) {
+           
+            if (parseFloat(elm.innerText) === parseFloat(larger)) {
                 elm.classList.add('correct')
+                console.log("correct")
             } else {
                 elm.classList.add('miss')
             }
-
-
+            
         })
 
         if (element.className.includes('correct')) {
@@ -67,10 +76,10 @@ options.forEach(function (element) {
             result.push('x');
         }
         afterAnswerArea.hidden = false;
-        carb1.hidden= false;
-        carb2.hidden= false;
-        foodImg1.hidden= true;
-        foodImg2.hidden= true;
+        carb1.hidden = false;
+        carb2.hidden = false;
+        foodImg1.hidden = true;
+        foodImg2.hidden = true;
 
     });
 });
@@ -114,6 +123,7 @@ next.addEventListener('click', () => {
 function updateQuestion() {
     console.log(questions[index])
     console.log(questions[index + 1])
+
     foodName1.innerText = questions[index].name;
     foodImg1.src = '/images/foods/' + questions[index].image;
     foodName2.innerText = questions[index + 1].name;
@@ -125,9 +135,9 @@ function updateQuestion() {
         options[i].classList.remove('miss');
     }
     afterAnswerArea.hidden = true;
-    carb1.hidden= true;
-    carb2.hidden= true;
-    foodImg1.hidden= false;
-    foodImg2.hidden= false;
+    carb1.hidden = true;
+    carb2.hidden = true;
+    foodImg1.hidden = false;
+    foodImg2.hidden = false;
 
 }

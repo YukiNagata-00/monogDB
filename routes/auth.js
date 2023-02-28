@@ -7,7 +7,8 @@ var path = require('path');
 const {
     userRegister,
     userLogin,
-    verifyToken
+    verifyToken,
+    updateLoginCount
 } = require('../controllers/auth');
 
 router.get('/login', (req, res) => {
@@ -20,5 +21,5 @@ router.get('/signup', (req, res) => {
 router.post('/register', userRegister);
 router.post('/login', userLogin);
 router.post('/verify-token', verifyToken);
-
+router.post('/update-login-count', updateLoginCount);
 module.exports = router;

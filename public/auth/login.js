@@ -31,7 +31,7 @@ fetch('/auth/verify-token', {
         return response.json();
     })
     .then(data => {
-        console.log(data)mail
+        console.log(data);
         addLoginCounting(data);
         window.location.href = '/home';
 
@@ -70,23 +70,6 @@ continueBtn.addEventListener('click', async function () {
     passwordErr.innerHTML = ''
 
     try {
-mail
-            const res = await fetch('/auth/login', {
-                method: 'POST',
-                body: JSON.stringify({ email, password }),
-                headers: { 'Content-Type': 'application/json' },
-            });
-            
-            if (res.ok) {
-                const data = await res.json();
-                console.log('Registration successful', data);
-                console.log(data.token);
-                addLoginCounting(data);
-                localStorage.setItem('jwtToken', data.token);
-                window.location.href = '/home'; //ホーム画面へ
-            } else {
-                const errorData = await res.json();
-                console.log('Registration failed', errorData);
 
         const res = await fetch('/auth/login', {
             method: 'POST',
@@ -116,13 +99,8 @@ mail
                 if (errorData.errors[i].param == 'password') {
                     passwordErr.innerHTML = errorData.errors[i].msg
                 }
-
-
             }
-
-
         }
-
     } catch (error) {
         console.log(error);
     }

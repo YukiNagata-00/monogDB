@@ -48,7 +48,7 @@ continueBtn.addEventListener('click', async function () {
             const data = await res.json();
             console.log('Registration successful', data);
             localStorage.setItem('jwtToken', data.token);
-            window.location.href = '/home';
+            window.location.href = '/auth/login';
 
         } else {
             const errorData = await res.json();

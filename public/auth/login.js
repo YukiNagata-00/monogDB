@@ -16,7 +16,7 @@ fetch('/auth/verify-token', {
     })
     .then(data => {
         console.log(data)
-        window.location.href = '/home'
+        //window.location.href = '/home'
     })
     .catch(error => {
         console.error('Error:', error);

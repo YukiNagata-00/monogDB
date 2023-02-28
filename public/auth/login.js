@@ -1,4 +1,20 @@
-/* eslint-disable no-unused-vars */
+
+async function addLoginCounting(data){
+    const loginCountRes = await fetch('/auth/update-login-count', {
+        method: 'POST',
+        body: JSON.stringify({ userId: data.user._id }), 
+        headers: {
+            'Authorization': `Bearer ${data.token}`,
+            'Content-Type': 'application/json'
+        }
+    });
+    
+    if (!loginCountRes.ok) {
+        const errorData = await loginCountRes.json();
+        console.log('Failed to update login count', errorData);
+    }
+}
+
 
 let token = localStorage.getItem('jwtToken');
 fetch('/auth/verify-token', {
@@ -15,8 +31,10 @@ fetch('/auth/verify-token', {
         return response.json();
     })
     .then(data => {
-        console.log(data)
-        //window.location.href = '/home'
+        console.log(data)mail
+        addLoginCounting(data);
+        window.location.href = '/home';
+
     })
     .catch(error => {
         console.error('Error:', error);
@@ -52,6 +70,24 @@ continueBtn.addEventListener('click', async function () {
     passwordErr.innerHTML = ''
 
     try {
+mail
+            const res = await fetch('/auth/login', {
+                method: 'POST',
+                body: JSON.stringify({ email, password }),
+                headers: { 'Content-Type': 'application/json' },
+            });
+            
+            if (res.ok) {
+                const data = await res.json();
+                console.log('Registration successful', data);
+                console.log(data.token);
+                addLoginCounting(data);
+                localStorage.setItem('jwtToken', data.token);
+                window.location.href = '/home'; //ホーム画面へ
+            } else {
+                const errorData = await res.json();
+                console.log('Registration failed', errorData);
+
         const res = await fetch('/auth/login', {
             method: 'POST',
             body: JSON.stringify({
@@ -80,6 +116,7 @@ continueBtn.addEventListener('click', async function () {
                 if (errorData.errors[i].param == 'password') {
                     passwordErr.innerHTML = errorData.errors[i].msg
                 }
+
 
             }
 

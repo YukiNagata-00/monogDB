@@ -1,4 +1,4 @@
-//クライアントサイド
+
 /**
  * このファイルを読み込むとき、LocalStrageに格納されているFoodデータをコンソールに表示する
  */
@@ -11,9 +11,6 @@ let foodName = document.getElementById("foodName");
 let ura = document.getElementById("ura");
 let heart = document.getElementById("heart");
 updateCard();
-
-// const UserModel = require("../models/User")
-// const User = UserModel.UserSchema;
 
 console.log(cards);
 //クリックするとflip するためのcode//
@@ -36,7 +33,6 @@ function updateCard(){
     foodName.innerText =cards[index].name ;
     ura.innerText =cards[index].carbo ;
     foodImg.src = '/images/foods/' + cards[index].image; 
-    // heart.checked = cards[index].favorite;
 };
 //右矢印をクリックしたら次のカードへうつる
 arrowRight.addEventListener('click', function(){
@@ -44,7 +40,6 @@ arrowRight.addEventListener('click', function(){
   foodName.innerText =cards[index].name ;
   ura.innerText =cards[index].carbo ;
   foodImg.src = '/images/foods/' + cards[index].image;
-
 
 });
 
@@ -54,19 +49,12 @@ arrowLeft.addEventListener('click', function(){
   foodName.innerText =cards[index].name ;
   ura.innerText =cards[index].carbo ;
   foodImg.src = '/images/foods/' +cards[index].image;
-  
 
 });
 
-//heartをクリックしたらuserのfavoritesに追加する
-heart.addEventListener('change',
-function(){
-    if(this.checked){
-        fetch('/gameFlashcard/update', )
-    }
-})
-//関数を作るのもあり！
+//heartをクリックしたらuserのfavoriteに追加する
 
+//let addFavorite = 
 
 //ログイン中のユーザー情報取得
 let token = localStorage.getItem('jwtToken');
@@ -85,8 +73,6 @@ let token = localStorage.getItem('jwtToken');
     })
     .then(data => {
         console.log(data)
-        
-        
     })
     .catch(error => {
         console.error('Error:', error);

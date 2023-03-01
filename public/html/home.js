@@ -46,5 +46,12 @@ window.onload = function () {
     .catch(error => {
         console.error('Error:', error);
     });
+    
+    //ログアウト
+    let logout = document.getElementById('logout');
+    logout.addEventListener('click', ()=>{
+        localStorage.removeItem("jwtToken");
+        window.location.href = "/auth/login";
+    })
 }
 

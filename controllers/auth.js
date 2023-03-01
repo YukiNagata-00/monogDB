@@ -115,4 +115,24 @@ const updateLoginCount = async (req, res) =>{
         res.status(500).json({ error: 'Internal server error' });
     }
 }
-module.exports = {userRegister, userLogin, verifyToken,updateLoginCount};
+//DBの「learningCount」に+10
+const updateLearningCount = async (req, res) =>{
+    try{
+        const userId = req.body.userId;
+        const user = await User.findById(userId);
+        console.log(user);
+        user.learningCount += 10;
+        await user.save();
+        res.status(200);
+
+    }catch(error){
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
+module.exports = {userRegister,
+    userLogin, 
+    verifyToken,
+    updateLoginCount,
+    updateLearningCount
+};

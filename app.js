@@ -6,6 +6,8 @@ const gameCompareRoutes = require('./routes/gameCompare')
 const indexRoutes = require('./routes/index');
 const gameFlashcardRoutes = require('./routes/gameFlashcard')
 const authRoutes = require('./routes/auth')
+const settingRoutes = require('./routes/setting');
+
 app.use(express.static(__dirname + "/public"));
 app.use(express.static('./views'));
 app.use(express.json());
@@ -32,3 +34,4 @@ app.use("/game/select", gameSelectRoutes);
 app.use("/game/compare", gameCompareRoutes);
 app.use("/game/flashcard", gameFlashcardRoutes);
 app.use('/auth', authRoutes);
+app.use('/setting', settingRoutes);

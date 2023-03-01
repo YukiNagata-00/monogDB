@@ -49,7 +49,7 @@ options.forEach(function (element) {
 //次の問題へ
 next.addEventListener('click', () => {
     index++;
-    if (index >= 5) {
+    if (index >= 10) {
         console.log('finish');
         console.log(result);
         console.log(score);
@@ -66,7 +66,49 @@ next.addEventListener('click', () => {
         fetch('/game/select/score', params)
             .then(response => {
                 if (response.ok) {
-                    window.location.href = '/game/select/result';
+
+                    //DBの「learningCount」に+10
+                    async function updateLearningnCount(data){
+                        const learningCountRes = await fetch('/auth/update-learning-count', {
+                            method: 'POST',
+                            body: JSON.stringify({ userId: data.user._id }), 
+                            headers: {
+                                'Authorization': `Bearer ${data.token}`,
+                                'Content-Type': 'application/json'
+                            }
+                        });
+                        
+                        if (!learningCountRes.ok) {
+                            const errorData = await learningCountRes.json();
+                            console.log('Failed to update learning count', errorData);
+                        }
+                    }
+
+                    //ログイン中のユーザー情報取得
+                    let token = localStorage.getItem('jwtToken');
+                        fetch('/auth/verify-token', {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': `Bearer ${token}`,
+                                'Content-Type': 'application/json'
+                            }
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            console.log(data)
+                            updateLearningnCount(data);
+                            //game結果画面に遷移
+                            window.location.href = '/game/select/result';
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                    
                 }
             })
             .catch(error => {

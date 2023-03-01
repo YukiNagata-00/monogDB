@@ -8,7 +8,8 @@ const {
     userRegister,
     userLogin,
     verifyToken,
-    updateLoginCount
+    updateLoginCount,
+    updateLearningCount
 } = require('../controllers/auth');
 
 router.get('/login', (req, res) => {
@@ -22,4 +23,5 @@ router.post('/register', userRegister);
 router.post('/login', userLogin);
 router.post('/verify-token', verifyToken);
 router.post('/update-login-count', updateLoginCount);
+router.post('/update-learning-count', updateLearningCount);
 module.exports = router;

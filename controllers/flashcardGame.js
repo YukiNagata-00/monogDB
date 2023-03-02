@@ -24,28 +24,45 @@ const getPlay = (req, res, next) =>{
 const addCardpage = (req, res, next) =>{
     res.sendFile(path.join(__dirname, '../public', '/flashcard/addFlashcard.html'));
 };
-// const addCard = ()
+const addCard =
+    //body('foodname').isLength({min: 1, max: 25 }).withMessage('食べ物名は１~25文字にしてください'),
+    
+    async(req, res) =>{
+        
+        try{
+            //ユーザーの新規作成
+            const add = await AddCard.create(req.body);
+    
+           
+        }catch(err){
+            return res.status(500).json(err);
+        }
+    
+    }
+;
 
-// const updatefavorite = async(req, res) => {
-//     try{
-//         const id = req.body.id;
-//         const foodid = req.food.id;
-//         const user = await User.findById(id);
-//         console.log(user);
 
-//         User.findOneAndUpdate({id: req.body.id},
-//             {$push:{favorites:Food.findById(id)}}
-//         )
-//         await User.save();
-//         res.status(200);
 
-//     }catch(error){
-//         console.error(error);
-//         res.status(500).json({ error: 'Internal server error' });
-//     }
+const updatefavorite = async(req, res) => {
+    try{
+        const id = req.body.id;
+        const foodid = req.food.id;
+        const user = await User.findById(id);
+        console.log(user);
+
+        User.findOneAndUpdate({id: req.body.id},
+            {$push:{favorites:Food.findById(id)}}
+        );
+        await User.save();
+        res.status(200);
+
+    }catch(error){
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
    
 
-// }
+}
 
 module.exports = {
     getStart,
@@ -54,8 +71,8 @@ module.exports = {
     getPlay,
     addCardpage,
     // getResult,
-    // addCard,
+    addCard,
 
     
-    //updatefavorite,
+    updatefavorite,
 };

@@ -16,6 +16,11 @@ window.onload = function () {
         window.location.href = '/game/compare/start';
 
     })
+    let addcard = document.getElementById("addcard")
+    addcard.addEventListener('click', function () {
+        window.location.href = '/game/flashcard/addcard';
+
+    })
 
     
     document.querySelector('#flashcard_start').addEventListener('click', function() {

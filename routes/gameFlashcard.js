@@ -4,7 +4,9 @@ const {
     getStart,
     getFood,
     getPlay,
-     //  updates,
+    addCardpage,
+    // addCard,
+   // updatefavorite
 } = require('../controllers/flashcardGame');
 
 
@@ -12,6 +14,8 @@ const {
 router.get('/start', getStart);
 router.get('/getFood', getFood);
 router.get('/play', getPlay);
-//router.post('/update',updates)
+router.get('/addcard', addCardpage);
+// router.post('/addcard', addCard)
+//router.post('/updatefavorite',updatefavorite)
 
 module.exports = router;

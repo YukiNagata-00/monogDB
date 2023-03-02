@@ -53,5 +53,10 @@ window.onload = function () {
         localStorage.removeItem("jwtToken");
         window.location.href = "/auth/login";
     })
+
+    let setting = document.getElementById('settingBtn');
+    setting.addEventListener('click', ()=>{
+        window.location.href = "setting";
+    })
 }
 

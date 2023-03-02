@@ -51,10 +51,29 @@ arrowLeft.addEventListener('click', function(){
   foodImg.src = '/images/foods/' +cards[index].image;
 
 });
+//クライアント側
+//heartをクリックしたらuserのfavoritesに追加する
+heart.addEventListener('change', function(){
+    if(heart.checked === true){
+        updateFavorite();
 
-//heartをクリックしたらuserのfavoriteに追加する
+    }else{
 
-//let addFavorite = 
+    }
+    
+});
+async function updateFavorite(){
+    if(this.checked){
+        fetch('/gameFlashcard/updatefavorite', {
+            method:'POST',
+            body: JSON.stringify({ userId: data.user._id }),
+            food : JSON.stringify({ foodId: data.food._id }),
+
+
+        })
+    }
+};
+//関数を作るのもあり！
 
 //ログイン中のユーザー情報取得
 let token = localStorage.getItem('jwtToken');

@@ -53,15 +53,15 @@ arrowLeft.addEventListener('click', function(){
 });
 //クライアント側
 //heartをクリックしたらuserのfavoritesに追加する
-// heart.addEventListener('change', function(){
-//     if(heart.checked === true){
-//         updateFavorite();
+heart.addEventListener('change', function(){
+    if(heart.checked === true){
+        updateFavorite();
 
-//     }else{
+    }else{
 
-//     }
+    }
     
-// });
+});
 async function updateFavorite(){
     if(this.checked){
         fetch('/gameFlashcard/updatefavorite', {

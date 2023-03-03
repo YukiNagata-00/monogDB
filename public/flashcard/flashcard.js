@@ -2,7 +2,11 @@
 /**
  * このファイルを読み込むとき、LocalStrageに格納されているFoodデータをコンソールに表示する
  */
-const cards = JSON.parse(localStorage.getItem("cards"));
+let cards = JSON.parse(localStorage.getItem("cards"));
+const addcardfile = JSON.parse(localStorage.getItem("addcardfile"));
+console.log(addcardfile)
+cards = cards.concat(addcardfile);
+console.log(cards)
 let foodImg = document.getElementById("foodImg");
 let arrowRight = document.getElementById("arrow-right");
 let arrowLeft = document.getElementById("arrow-left");
@@ -12,7 +16,7 @@ let ura = document.getElementById("ura");
 let heart = document.getElementById("heart");
 updateCard();
 
-console.log(cards);
+
 //クリックするとflip するためのcode//
 var card = document.querySelector('.card');
 
@@ -33,6 +37,7 @@ function updateCard(){
     foodName.innerText =cards[index].name ;
     ura.innerText =cards[index].carbo ;
     foodImg.src = '/images/foods/' + cards[index].image; 
+
 };
 //右矢印をクリックしたら次のカードへうつる
 arrowRight.addEventListener('click', function(){
@@ -49,25 +54,33 @@ arrowLeft.addEventListener('click', function(){
   foodName.innerText =cards[index].name ;
   ura.innerText =cards[index].carbo ;
   foodImg.src = '/images/foods/' +cards[index].image;
+//   if(heart.checked === true){
+    updateFavorite();
+
+// }else{
+
+// }
+
 
 });
 //クライアント側
 //heartをクリックしたらuserのfavoritesに追加する
-heart.addEventListener('change', function(){
-    if(heart.checked === true){
+heart.addEventListener('click', function(){
+    // if(heart.checked === true){
         updateFavorite();
 
-    }else{
+    // }else{
 
-    }
+    // }
     
 });
 async function updateFavorite(){
+    console.log("test2")
     if(this.checked){
-        fetch('/gameFlashcard/updatefavorite', {
+        fetch('/game/flashcard/updatefavorite', {
             method:'POST',
-            body: JSON.stringify({ userId: data.user._id }),
-            food : JSON.stringify({ foodId: data.food._id }),
+            body: JSON.stringify({ userId: data.user._id , foodId: data.food._id}),
+            
 
 
         })

@@ -21,6 +21,14 @@ window.onload = function () {
         localStorage.setItem("cards", JSON.stringify(data));
         window.location.href = "/game/flashcard/start";
     })
+    
+    fetch('/game/flashcard/getAddCard')
+    .then(response => response.json())
+    .then(data => {
+        console.log('success');
+        localStorage.setItem("addcardfile", JSON.stringify(data));
+        window.location.href = "/game/flashcard/start";
+    })
     .catch(error => console.error(error));
     });
 

@@ -44,7 +44,7 @@ document.getElementById('closeBtn').addEventListener('click', function () {
 options.forEach(function (element) {
 
     element.addEventListener("click", function () {
-        
+
 
         let larger;
         let food1 = questions[index].carbo

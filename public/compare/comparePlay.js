@@ -59,6 +59,7 @@ options.forEach(function (element) {
 
         //選択肢クリック時に正誤判定し、選択肢に色をつけ、「次へ」ボタンと「コメント」を表示させる。
         options.forEach(elm => {
+            console.log(elm.innerText === larger)
            
             if (parseFloat(elm.innerText) === parseFloat(larger)) {
                 elm.classList.add('correct')

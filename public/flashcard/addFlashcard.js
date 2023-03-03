@@ -1,25 +1,31 @@
 let addBtn = document.getElementById('okay')
-let foodname = document.getElementById('foodname')
-let picture = document.getElementById('picture')
-let carbCount =document.getElementById('carbCount')
-
 
 addBtn.addEventListener('click', async function (){
+
+    let name = document.getElementById('foodname')
+    let image = document.getElementById('picture')
+    let carbo =document.getElementById('carbCount')
+
+    console.log("test3");
     
   
-    foodname = foodname.value;
-    picture = picture.value;
-    carbCount = carbCount.value;
+    name = foodname.value;
+    image = image.value;
+    carbo = carbo.value;
+    console.log(foodname);
 
     try{
-        const res = await fetch('/flashcard/addcard', {
+        const res = await fetch('/game/flashcard/addcard2', {
             method: 'POST',
             body :JSON.stringify({
-                foodname,
-                picture,
-                carbCount
+                name,
+                image,
+                carbo
 
-            })
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            },
         });
         if(res.ok){
             const data = await res.json();

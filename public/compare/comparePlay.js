@@ -23,7 +23,7 @@ const foodName2 = document.getElementById('foodName2');
 const foodImg2 = document.getElementById('foodImg2');
 const carb1 = document.getElementById('foodCarb1');
 const carb2 = document.getElementById('foodCarb2');
-
+const hint= document.getElementById('hint');
 const options = document.querySelectorAll('.option');
 
 const afterAnswerArea = document.getElementById('after_answer');
@@ -44,6 +44,8 @@ document.getElementById('closeBtn').addEventListener('click', function () {
 options.forEach(function (element) {
 
     element.addEventListener("click", function () {
+        
+
         let larger;
         let food1 = questions[index].carbo
         let food2 = questions[index + 1].carbo
@@ -75,12 +77,13 @@ options.forEach(function (element) {
             comment.innerText = "惜しい！";
             result.push('x');
         }
+        hint.hidden= true;
         afterAnswerArea.hidden = false;
         carb1.hidden = false;
         carb2.hidden = false;
         foodImg1.hidden = true;
         foodImg2.hidden = true;
-
+        
     });
 });
 

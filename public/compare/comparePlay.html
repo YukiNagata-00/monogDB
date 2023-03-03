@@ -61,11 +61,29 @@
 
     </div>
 
-    <div id="hint" class="w3-button w3-hover-none w3-card w3-white"
+    <button id="hint" class="w3-button w3-hover-none w3-card w3-white"
         style="max-width:50%; border-radius: 40px;margin: 0 auto; position:relative;top:160px; text-align: center;">
 
-        <h4>ヒント</h4>
+        <h4 onclick="document.getElementById('h').style.display='block'">ヒント</h4>
+    </button>
+
+
+    <div id='h' class="w3-modal"  >
+        <div class="w3-modal-content w3-animate-opacity">
+            <div class="w3-container w3-padding-25 w3-margin">
+                <span onclick="document.getElementById('h').style.display='none'"
+                    class="w3-button w3-display-topleft">&times;</span>
+                <div class="w3-padding-24">
+                    <br>
+                    <img src="https://i.ibb.co/5MgFJKj/Screenshot-2023-03-03-at-3-37-26-PM.png" alt="hintImg"
+                        class="" style="margin:0 auto;max-width:1200px">
+                        <br>
+                </div>
+
+            </div>
+        </div>
     </div>
+
 
 
 

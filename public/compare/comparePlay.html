@@ -14,13 +14,14 @@
         body {
             background-color: #E6F0E3;
 
+
         }
     </style>
 </head>
 
 <body>
 
-    <span id="closeBtn" style='font-size:36px; position:absolute;'
+    <span id="closeBtn" style='font-size:36px; position:absolute; '
         class="material-symbols-outlined w3-button w3-hover-none w3-left-align w3-margin">
         close
     </span>
@@ -32,14 +33,15 @@
     </div>
 
 
-    <div class='w3-row' style="height:330px;max-width:70%; margin: 0 auto; position:relative;top:100px; text-align: center;">
+    <div class='w3-row'
+        style="height:330px;max-width:70%; margin: 0 auto; position:relative;top:100px; text-align: center;">
         <div class="w3-col l1 w3-hide-medium">
             <br>
         </div>
         <div id="option1" style='height:100%;max-width:40%; border-radius: 40px;'
             class="option w3-button w3-hover-white w3-col l5 m6 s10 w3-card w3-white " class="w3-padding w3-margin">
 
-            <h1 id="foodName1" class="w3-padding"></h1>
+            <h2 id="foodName1" class="w3-padding"></h2>
             <img id="foodImg1" style="max-width:70%;" class="w3-center" src="" alt="donut">
             <h1 id="foodCarb1" style="margin-top:80px;font-weight:550;"></h1>
             <br><br>
@@ -51,7 +53,7 @@
         <div id="option2" style='height:100%;max-width:40%; border-radius: 40px;'
             class="option w3-button w3-hover-white w3-col l5 m6 s10 w3-card w3-white " class="w3-padding w3-margin">
 
-            <h1 id="foodName2" class="w3-padding"></h1>
+            <h2 id="foodName2" class="w3-padding"></h2>
             <img id="foodImg2" style="max-width:70%;" class="w3-center" src="" alt="donut">
             <h1 id="foodCarb2" style="margin-top:80px;font-weight:550;"></h1>
             <br><br>
@@ -59,11 +61,20 @@
 
     </div>
 
+    <div id="hint" class="w3-button w3-hover-none w3-card w3-white"
+        style="max-width:50%; border-radius: 40px;margin: 0 auto; position:relative;top:160px; text-align: center;">
+
+        <h4>ヒント</h4>
+    </div>
+
+
+
+
     <div id="after_answer" class="w3-padding" style="position:relative;top:75px; "">
         <h3 id="comment" style="position:relative;top:75px; text-align: center; max-width:30%; margin:0 auto;">
         </h3>
         <span id="next" style="font-size:40px; float:right;right:80px;position:relative"
-            class=" material-symbols-outlined w3-button w3-hover-none w3-margin w3-padding">
+            class="material-symbols-outlined w3-button w3-hover-none w3-margin w3-padding">
             arrow_forward
         </span>
     </div>

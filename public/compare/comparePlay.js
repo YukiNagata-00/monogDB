@@ -42,9 +42,7 @@ document.getElementById('closeBtn').addEventListener('click', function () {
 
 
 options.forEach(function (element) {
-
     element.addEventListener("click", function () {
-
 
         let larger;
         let food1 = questions[index].carbo
@@ -56,12 +54,10 @@ options.forEach(function (element) {
         }
         carb1.innerText = questions[index].carbo
         carb2.innerText = questions[index + 1].carbo
-
+        console.log(larger)
         //選択肢クリック時に正誤判定し、選択肢に色をつけ、「次へ」ボタンと「コメント」を表示させる。
         options.forEach(elm => {
-            console.log(elm.innerText === larger)
-           
-            if (parseFloat(elm.innerText) === parseFloat(larger)) {
+            if (elm.innerText.trim() === larger) {
                 elm.classList.add('correct')
                 console.log("correct")
             } else {

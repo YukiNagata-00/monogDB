@@ -23,7 +23,7 @@ addBtn.addEventListener('click', async function (e){
     
   
     name = name.value;
-    image = await imageinput.files[0].name;
+    let  image = await imageinput.files[0].name;
     carbo = carbo.value;
     console.log(name);
 
@@ -40,6 +40,7 @@ addBtn.addEventListener('click', async function (e){
                 'Content-Type': 'application/json'
             },
         });
+        console.log(res);
         const addcardimage =
             await fetch('/game/flashcard/addImage', {
                 method :'POST',

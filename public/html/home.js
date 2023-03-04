@@ -59,7 +59,7 @@ window.onload = function () {
     let logout = document.getElementById('logout');
     logout.addEventListener('click', ()=>{
         localStorage.removeItem("jwtToken");
-        window.location.href = "/auth/login";
+        window.location.href = "intro";
     })
 
     let setting = document.getElementById('settingBtn');

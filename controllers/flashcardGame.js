@@ -1,6 +1,19 @@
 const Food = require("../models/Food")
 const User = require("../models/User")
 const AddCard = require("../models/AddCard")
+
+const multer = require("multer");
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'public/images/')
+    },
+    filename: function (req, file, cb) {
+        //const unixTime = new Date().getTime();
+        const fileName = `${file.originalname}`
+      cb(null, file.originalname)
+    }
+  })
+  const upload = multer({storage});
 var path = require('path');
 
 const getStart = (req, res, next) =>{
@@ -74,6 +87,18 @@ const updatefavorite = async(req, res) => {
 
 }
 
+const addImage = async(req, res) =>{
+    console.log("addImage")
+    try{
+        console.log(req.file);
+        res.send('ファイルのアップロードが完了しました。');
+
+    }catch(error){
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
 module.exports = {
     getStart,
     //getReady,
@@ -83,7 +108,6 @@ module.exports = {
     addCardpage,
     // getResult,
     addCard,
-
-    
     updatefavorite,
+    addImage
 };

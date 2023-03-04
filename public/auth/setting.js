@@ -5,7 +5,6 @@ let loginEmail = document.getElementById('emailLogin')
 let scoreEmail = document.getElementById('emailScore')
 let password = document.getElementById('password')
 let confirmBtn= document.getElementById('okay')
-confirmBtn.hidden= true;
 
 
 document.getElementById("back").addEventListener('click', function () {

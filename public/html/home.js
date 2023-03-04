@@ -59,7 +59,13 @@ window.onload = function () {
     let logout = document.getElementById('logout');
     logout.addEventListener('click', ()=>{
         localStorage.removeItem("jwtToken");
-        window.location.href = "intro";
+        if (confirm("本当にログアウトして良いですか？")) {
+            console.log(1)
+            window.location.href = "intro";
+          } else {
+            console.log(0)
+          }
+        
     })
 
     let setting = document.getElementById('settingBtn');

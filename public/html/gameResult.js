@@ -1,6 +1,12 @@
+/* eslint-disable no-unused-vars */
 const url = window.location.href; // Get current URL
 const parts = url.split('/');
 const selectString = parts[4];
+
+const afterBtn = document.getElementById('after')
+const beforeBtn = document.getElementById('before')
+const foodName = document.getElementById('foodName')
+const foodImg = document.getElementById('foodImg')
 
 fetch(`/game/${selectString}/score`)
     .then(response => response.json())
@@ -20,3 +26,4 @@ select.addEventListener('click', function () {
     window.location.href = "/home";
 
 })
+

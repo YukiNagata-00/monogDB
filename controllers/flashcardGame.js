@@ -48,20 +48,31 @@ const addCardpage = (req, res, next) =>{
 };
 const addCard =
     //body('foodname').isLength({min: 1, max: 25 }).withMessage('食べ物名は１~25文字にしてください'),
-  
+
     async(req, res) =>{
 
         try{
             //ユーザーの新規作成
             const add = await AddCard.create(req.body);
-            console.log("try");
             console.log(req.body);
-        
-           
+            res.send('カードを追加しました');
+
         }catch(err){
             return res.status(500).json(err);
         }
+    };
+
+
+    const addImage = async(req, res) =>{
+        console.log("addImage")
+        try{
+            console.log(req.file);
+            res.send('ファイルのアップロードが完了しました。');
     
+        }catch(error){
+            console.error(error);
+            res.status(500).json({ error: 'Internal server error' });
+        }
     };
    
 
@@ -87,17 +98,7 @@ const updatefavorite = async(req, res) => {
 
 }
 
-const addImage = async(req, res) =>{
-    console.log("addImage")
-    try{
-        console.log(req.file);
-        res.send('ファイルのアップロードが完了しました。');
 
-    }catch(error){
-        console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
-    }
-};
 
 module.exports = {
     getStart,

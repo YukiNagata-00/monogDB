@@ -7,14 +7,17 @@ const indexRoutes = require('./routes/index');
 const gameFlashcardRoutes = require('./routes/gameFlashcard')
 const authRoutes = require('./routes/auth')
 const settingRoutes = require('./routes/setting');
+
 // eslint-disable-next-line no-unused-vars
 const introRoutes = require('./routes/intro')
+
 
 //require('./mail/mail')
 app.use(express.static(__dirname + "/public"));
 app.use(express.static('./views'));
 app.use(express.json());
 require('dotenv').config();
+
 //DB接続
 
 mongoose.set('strictQuery', true);

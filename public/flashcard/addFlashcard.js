@@ -62,3 +62,9 @@ addBtn.addEventListener('click', async function (e){
 
 
 })
+
+let back = document.getElementById("back")
+back.addEventListener('click', function () {
+    window.location.href = '/game/flashcard/start';
+
+})

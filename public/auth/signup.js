@@ -9,6 +9,7 @@ let usernameError = document.getElementById('usernameMessage')
 let emailError = document.getElementById('emailMessage')
 let password1Error = document.getElementById('password1Message')
 let password2Error = document.getElementById('password2Message')
+let backBtn = document.getElementById('back')
 
 function clearAll(){
     usernameError.innerHTML = ''
@@ -81,4 +82,8 @@ continueBtn.addEventListener('click', async function () {
 
 loginBtn.addEventListener('click',function(){
     window.location.href = "/auth/login";
+})
+
+backBtn.addEventListener('click', function () {
+    window.location.href = '/intro';
 })

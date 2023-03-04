@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 
 async function addLoginCounting(data){
     const loginCountRes = await fetch('/auth/update-login-count', {
@@ -47,7 +48,7 @@ let forgotBtn = document.getElementById('forgotButton')
 let signupBtn = document.getElementById('createButton')
 let emailErr = document.getElementById('emailMessage')
 let passwordErr = document.getElementById('passwordMessage')
-
+let backBtn = document.getElementById('back')
 
 forgotBtn.addEventListener('click', function () {
     console.log('forgot password buttion clicked')
@@ -55,6 +56,10 @@ forgotBtn.addEventListener('click', function () {
 
 signupBtn.addEventListener('click', function () {
     window.location.href = '/auth/signup';
+})
+
+backBtn.addEventListener('click', function () {
+    window.location.href = '/intro';
 })
 
 

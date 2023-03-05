@@ -74,28 +74,67 @@ const addCard =
             res.status(500).json({ error: 'Internal server error' });
         }
     };
-   
 
-const updatefavorite = async(req, res) => {
+
+const updateFavorite = async(req, res) => {
     console.log("test");
     try{
-        const id = req.body.userId;
-        const foodid = req.body.foodId;
-        const user = await User.findById(id);
-        console.log(user);
+        const userId = req.body.userId;
+        const foodId = req.body.foodId;
 
-        User.findOneAndUpdate({id: req.body.id},
-            {$push:{favorites:foodid.findById(id)}}
-        );
-        await User.save();
+        //食べ物がまだ配列に存在しない場合に追加、あったら消す
+        const user = await User.findById(userId);
+        const update = user.favorites.includes(foodId)
+        ? { $pull: { favorites: foodId } }
+        : { $addToSet: { favorites: foodId } };
+
+        await User.findByIdAndUpdate(userId, update);
+
         res.status(200);
 
     }catch(error){
         console.error(error);
         res.status(500).json({ error: 'Internal server error' });
     }
-   
+}
 
+const getStartId = (req, res)=>{
+    Food.findOne({}, '_id').sort({_id: 1}).exec((error, food)=>{
+        if (error) {
+            console.log(error);
+            res.status(500).send({ error: 'An error occurred' });
+        }
+        res.json(food);
+    })
+}
+const getOneFood = (req, res) => {
+    const foodId = req.query.foodId;
+    Food.findById(foodId).exec((error, food) => {
+        if (error) {
+        console.log(error);
+        res.status(500).send({ error: 'An error occurred' });
+    }
+        res.json(food);
+    });
+};
+
+const getNextFood = async(req, res) =>{
+    const foodId = req.query.foodId;
+    const nextFood = await Food.findOne({ _id: { $gt: foodId } });
+    if (!nextFood) {
+        res.status(404).send('Next food not found');
+        return;
+    }
+    res.status(200).send({ nextFoodId: nextFood._id });
+}
+const getPreviousFood = async(req, res) =>{
+    const foodId = req.query.foodId;
+    const previousFood = await Food.findOne({ _id: { $lt: foodId } }).sort({ _id: -1 });
+    if (!previousFood) {
+        res.status(404).send('Next food not found');
+        return;
+    }
+    res.status(200).send({ previousFoodId: previousFood._id });
 }
 
 
@@ -109,6 +148,10 @@ module.exports = {
     addCardpage,
     // getResult,
     addCard,
-    updatefavorite,
-    addImage
+    updateFavorite,
+    addImage,
+    getStartId,
+    getOneFood,
+    getNextFood,
+    getPreviousFood
 };

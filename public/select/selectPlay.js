@@ -15,6 +15,7 @@ const next = document.getElementById('next');
 afterAnswerArea.hidden = true;
 let result = [];
 let score = 0;
+let incorrect= [];
 updateQuestion();
 
 document.getElementById('closeBtn').addEventListener('click', function () {
@@ -41,6 +42,8 @@ options.forEach(function (element) {
         } else {
             comment.innerText = "惜しい！";
             result.push('x');
+            incorrect.push(questions[index])
+            
         }
         afterAnswerArea.hidden = false;
     });
@@ -68,25 +71,29 @@ next.addEventListener('click', () => {
                 if (response.ok) {
 
                     //DBの「learningCount」に+10
-                    async function updateLearningnCount(data){
+                    
+                    async function updateLearningnCount(data) {
                         const learningCountRes = await fetch('/auth/update-learning-count', {
                             method: 'POST',
-                            body: JSON.stringify({ userId: data.user._id }), 
+                            body: JSON.stringify({
+                                userId: data.user._id
+                            }),
                             headers: {
                                 'Authorization': `Bearer ${data.token}`,
                                 'Content-Type': 'application/json'
                             }
                         });
-                        
+
                         if (!learningCountRes.ok) {
                             const errorData = await learningCountRes.json();
                             console.log('Failed to update learning count', errorData);
                         }
                     }
+                    
 
                     //ログイン中のユーザー情報取得
                     let token = localStorage.getItem('jwtToken');
-                        fetch('/auth/verify-token', {
+                    fetch('/auth/verify-token', {
                             method: 'POST',
                             headers: {
                                 'Authorization': `Bearer ${token}`,
@@ -101,14 +108,15 @@ next.addEventListener('click', () => {
                         })
                         .then(data => {
                             console.log(data)
-                            updateLearningnCount(data);
+                            //updateLearningnCount(data);
                             //game結果画面に遷移
+                            localStorage.setItem('incorrect',JSON.stringify(incorrect))
                             window.location.href = '/game/select/result';
                         })
                         .catch(error => {
                             console.error('Error:', error);
                         });
-                    
+
                 }
             })
             .catch(error => {

@@ -8,6 +8,9 @@ const beforeBtn = document.getElementById('before')
 const foodName = document.getElementById('foodName')
 const foodImg = document.getElementById('foodImg')
 
+let incorrect = JSON.parse(localStorage.getItem('incorrect'));
+console.log(incorrect)
+
 fetch(`/game/${selectString}/score`)
     .then(response => response.json())
     .then(data => {

@@ -1,4 +1,4 @@
-window.onload = function () {
+
     let back = document.getElementById("back");
     back.addEventListener('click', function () {
         window.location.href = '/home';
@@ -7,8 +7,12 @@ window.onload = function () {
 
     let all = document.getElementById("allBtn")
     all.addEventListener('click', function () {
-        window.location.href = '/game/flashcard/play';
-
+        fetch('/game/flashcard/getStartId')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data._id)
+            window.location.href = `/game/flashcard/play?id=${data._id}`;
+        })
     });
 
     let compare = document.getElementById("compareBtn")
@@ -22,29 +26,4 @@ window.onload = function () {
 
     })
 
-    
-    document.querySelector('#flashcard_start').addEventListener('click', function() {
-    fetch('/game/flashcard/getFood')
-    .then(response => response.json())
-    .then(data => {
-        console.log('success');
-        localStorage.setItem("cards", JSON.stringify(data));
-        fetch('/game/flashcard/getAddCard')
-        .then(response => response.json())
-        .then(data => {
-            console.log('success');
-            localStorage.setItem("addcardfile", JSON.stringify(data));
-            window.location.href = "/game/flashcard/play";
-        })
-        .catch(error => console.error(error));
-        });
-
-
-
-    })
-    .catch(error => console.error(error));
-    
-
-
-}
 

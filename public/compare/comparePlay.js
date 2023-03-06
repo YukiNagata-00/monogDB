@@ -32,6 +32,7 @@ const next = document.getElementById('next');
 afterAnswerArea.hidden = true;
 carb1.hidden = true;
 carb2.hidden = true;
+hint.hidden= false;
 let result = [];
 let score = 0;
 updateQuestion();
@@ -43,7 +44,7 @@ document.getElementById('closeBtn').addEventListener('click', function () {
 
 options.forEach(function (element) {
     element.addEventListener("click", function () {
-
+        hint.hidden= true;
         let larger;
         let food1 = questions[index].carbo
         let food2 = questions[index + 1].carbo
@@ -74,7 +75,7 @@ options.forEach(function (element) {
             comment.innerText = "惜しい！";
             result.push('x');
         }
-        hint.hidden= true;
+        
         afterAnswerArea.hidden = false;
         carb1.hidden = false;
         carb2.hidden = false;

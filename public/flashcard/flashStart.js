@@ -15,12 +15,12 @@
         })
     });
 
-    let compare = document.getElementById("compareBtn")
-    compare.addEventListener('click', function () {
-        window.location.href = '/game/compare/start';
+    let favorite = document.getElementById("favoriteBtn")
+    favorite.addEventListener('click', function () {
+        window.location.href = '/game/flashcard/favorite';
 
     })
-    let addcard = document.getElementById("addcard")
+    let addcard = document.getElementById("addcardBtn")
     addcard.addEventListener('click', function () {
         window.location.href = '/game/flashcard/addcard';
 

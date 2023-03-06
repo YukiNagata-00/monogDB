@@ -130,9 +130,55 @@ const updateLearningCount = async (req, res) =>{
         res.status(500).json({ error: 'Internal server error' });
     }
 }
+
+//ユーザー情報編集
+const updateUserInfo =  [
+    //バリデーション
+    body('username').isLength({min: 1, max: 25 }).withMessage('ユーザー名は１~25文字にしてください'),
+    body('email').isEmail().withMessage('正しいメールアドレスを入力してください'),
+    body('email2').isEmail().withMessage('正しいメールアドレスを入力してください'),
+    body('password').isLength({min: 5, max: 20 }).withMessage('パスワードは5~20文字にしてください'),
+    body('email').custom(async (value, { req }) => {
+        try {
+            const user = await User.findOne({ email: value });
+            if (user && user._id.toString() !== req.body.userId) {
+                throw new Error("E-mail already in use");
+            }
+            return true;
+        } catch (err) {
+            throw new Error("Server Error");
+        }
+    }),
+    validation.validate,
+    async(req, res) =>{
+    const password = req.body.password;
+    try{
+        req.body.password = CryptoJS.SHA256(password).toString();;
+        //ユーザーの編集
+        const user = await User.findByIdAndUpdate(
+            req.body.userId,
+            {$set: {username: req.body.username,
+                email: req.body.email, 
+                email2: req.body.email2,
+                password: req.body.password
+            }}
+            );
+        //jwt
+        const token = jwt.sign({ id: user._id }, process.env.TOKEN_SECRET_KEY,  { expiresIn: '24h' });
+
+        return res.status(200).json({user, token});
+    }catch(err){
+        return res.status(500).json(err);
+    }
+
+},]
+
+
+
 module.exports = {userRegister,
     userLogin, 
     verifyToken,
     updateLoginCount,
-    updateLearningCount
+    updateLearningCount,
+    updateUserInfo
 };

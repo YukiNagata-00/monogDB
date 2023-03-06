@@ -1,4 +1,56 @@
-var user;
+let user;
+const params = window.location.search;
+const foodId = new URLSearchParams(params).get("id");
+console.log(foodId);
+let foodData;
+let foodImg = document.getElementById("foodImg");
+let arrowRight = document.getElementById("arrow-right");
+let arrowLeft = document.getElementById("arrow-left");
+let foodName = document.getElementById("foodName");
+let ura = document.getElementById("ura");
+let heart = document.getElementById("heart");
+
+
+function getOneFood(){
+    fetch(`/game/flashcard/getOneFood?foodId=${foodId}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        foodData = data;
+        console.log(foodData);
+        showCard();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+
+// //カードを表示させる機能
+function showCard(){
+    if (!foodData) {
+        console.log('foodData is undefined');
+        return;
+    }
+
+    foodName.innerText =foodData.name ;
+    ura.innerText =foodData.carbo ;
+    foodImg.src = '/images/foods/' + foodData.image; 
+
+    if(user.user.favorites.includes(foodData._id)){
+        heart.checked =true;
+    }else{
+        heart.checked =false;
+    }
+};
+
 //ログイン中のユーザー情報取得
 let token = localStorage.getItem('jwtToken');
     fetch('/auth/verify-token', {
@@ -17,45 +69,13 @@ let token = localStorage.getItem('jwtToken');
     .then(data => {
         user =data;
         console.log(user)
+        getOneFood();
+        
     })
     .catch(error => {
         console.error('Error:', error);
     });
 
-
-
-const params = window.location.search;
-console.log(params);
-const foodId = new URLSearchParams(params).get("id");
-console.log(foodId);
-var foodData;
-
-    fetch(`/game/flashcard/getOneFood?foodId=${foodId}`, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        foodData = data;
-        console.log(data);
-        showCard();
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-
-
-let foodImg = document.getElementById("foodImg");
-let arrowRight = document.getElementById("arrow-right");
-let arrowLeft = document.getElementById("arrow-left");
-let foodName = document.getElementById("foodName");
-let ura = document.getElementById("ura");
-let heart = document.getElementById("heart");
 
 
 
@@ -74,20 +94,7 @@ back.addEventListener('click', function () {
 
 
 
-// //カードを表示させる機能
-function showCard(){
-    console.log(foodData);
-    console.log(user.user.favorites.length);
-    foodName.innerText =foodData.name ;
-    ura.innerText =foodData.carbo ;
-    foodImg.src = '/images/foods/' + foodData.image; 
 
-    if(user.user.favorites.includes(foodData._id)){
-        heart.checked =true;
-    }else{
-        heart.checked =false;
-    }
-};
 // //右矢印をクリックしたら次のカードへうつる
 arrowRight.addEventListener('click', function(){
     fetch(`/game/flashcard/getNextFood?foodId=${foodId}`, {

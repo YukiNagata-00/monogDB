@@ -16,6 +16,10 @@ const storage = multer.diskStorage({
   const upload = multer({storage});
 var path = require('path');
 
+const getfavoritePage = (req, res, next) =>{
+    res.sendFile(path.join(__dirname, '../public', '/flashcard/favorite.html'));
+}
+
 const getStart = (req, res, next) =>{
     res.sendFile(path.join(__dirname, '../public', '/flashcard/flashStart.html'));
 }
@@ -140,6 +144,7 @@ const getPreviousFood = async(req, res) =>{
 
 
 module.exports = {
+    getfavoritePage,
     getStart,
     //getReady,
     getFood,

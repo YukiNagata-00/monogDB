@@ -141,5 +141,6 @@ function updateQuestion() {
     carb2.hidden = true;
     foodImg1.hidden = false;
     foodImg2.hidden = false;
+    hint.hidden= false;
 
 }

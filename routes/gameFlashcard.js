@@ -13,6 +13,7 @@ const storage = multer.diskStorage({
   const upload = multer({storage});
 const router = express.Router();
 const {
+    getfavoritePage,
     getStart,
     getFood,
     getPlay,
@@ -26,7 +27,7 @@ const {
     getNextFood,
     getPreviousFood
 } = require('../controllers/flashcardGame');
-
+router.get('/favorite', getfavoritePage)
 router.get('/getStartId', getStartId)
 router.get('/getNextFood', getNextFood)
 router.get('/getOneFood', getOneFood)

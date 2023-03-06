@@ -62,7 +62,8 @@ let token = localStorage.getItem('jwtToken');
     })
     .then(response => {
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            localStorage.removeItem("jwtToken");
+            window.location.href = "intro";
         }
         return response.json();
     })

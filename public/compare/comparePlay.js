@@ -45,6 +45,7 @@ document.getElementById('closeBtn').addEventListener('click', function () {
 options.forEach(function (element) {
     element.addEventListener("click", function () {
         hint.hidden= true;
+        console.log(hint.hidden)
         let larger;
         let food1 = questions[index].carbo
         let food2 = questions[index + 1].carbo

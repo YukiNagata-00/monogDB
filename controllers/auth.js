@@ -132,46 +132,52 @@ const updateLearningCount = async (req, res) =>{
 }
 
 //ユーザー情報編集
-const updateUserInfo =  [
+const updateUserInfo = [
     //バリデーション
     body('username').isLength({min: 1, max: 25 }).withMessage('ユーザー名は１~25文字にしてください'),
     body('email').isEmail().withMessage('正しいメールアドレスを入力してください'),
     body('email2').isEmail().withMessage('正しいメールアドレスを入力してください'),
-    body('password').isLength({min: 5, max: 20 }).withMessage('パスワードは5~20文字にしてください'),
+    body('newPassword').isLength({min: 5, max: 20 }).withMessage('パスワードは5~20文字にしてください'),
     body('email').custom(async (value, { req }) => {
         try {
             const user = await User.findOne({ email: value });
-            if (user && user._id.toString() !== req.body.userId) {
-                throw new Error("E-mail already in use");
-            }
-            return true;
+        if (user && user._id.toString() !== req.body.userId) {
+            throw new Error("このメールアドレスはすでに使われています");
+        }
+        return true;
         } catch (err) {
             throw new Error("Server Error");
         }
     }),
     validation.validate,
-    async(req, res) =>{
-    const password = req.body.password;
-    try{
-        req.body.password = CryptoJS.SHA256(password).toString();;
-        //ユーザーの編集
-        const user = await User.findByIdAndUpdate(
-            req.body.userId,
-            {$set: {username: req.body.username,
+    async (req, res) => {
+        const currentPassword = req.body.currentPassword;
+        const newPassword = req.body.newPassword;
+    try {
+        //現在のパスワードがあっているかチェック
+            const user = await User.findById(req.body.userId);
+            const currentPasswordHash = CryptoJS.SHA256(currentPassword).toString();
+        if (currentPasswordHash !== user.password) {
+            return res.status(401).json({ message: '現在のパスワードがまちがっています' });
+        }
+        // 新しいパスワードをハッシュ化
+        const newPasswordHash = CryptoJS.SHA256(newPassword).toString();
+        const updatedUser = await User.findByIdAndUpdate(req.body.userId, {
+            $set: {
+                username: req.body.username,
                 email: req.body.email, 
                 email2: req.body.email2,
-                password: req.body.password
-            }}
-            );
-        //jwt
-        const token = jwt.sign({ id: user._id }, process.env.TOKEN_SECRET_KEY,  { expiresIn: '24h' });
-
-        return res.status(200).json({user, token});
-    }catch(err){
+                password: newPasswordHash,
+            },
+        });
+        // JWT token
+        const token = jwt.sign({ id: updatedUser._id }, process.env.TOKEN_SECRET_KEY, { expiresIn: '24h' });
+        return res.status(200).json({ user: updatedUser, token });
+    } catch (err) {
         return res.status(500).json(err);
     }
-
-},]
+    },
+];
 
 
 

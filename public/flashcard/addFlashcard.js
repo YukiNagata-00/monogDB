@@ -1,7 +1,17 @@
 let addBtn = document.getElementById('okay')
+let foodnameError = document.getElementById('foodMessage')
+let imageError = document.getElementById('imageMessage')
+let carboError = document.getElementById('carboMessage')
+
+function clearAll(){
+    foodnameError.innerHTML = ''
+    imageError.innerHTML = ''
+    carboError.innerHTML = ''
+}
 
 
 addBtn.addEventListener('click', async function (e){
+    clearAll()
     
 
     let imageinput = document.querySelector("#imageinput")
@@ -15,11 +25,9 @@ addBtn.addEventListener('click', async function (e){
     formData.append("image",file)
 
     let name = document.getElementById('foodname')
-   // let image = document.getElementById('picture')
     let carbo =document.getElementById('carbCount')
 
-
-    console.log("test3");
+  
     
   
     name = name.value;
@@ -55,6 +63,14 @@ addBtn.addEventListener('click', async function (e){
             console.log('Registration successful', data);
             alert("追加しました");
            
+        }else{
+
+            
+            if (carbo.match(/^[^\x01-\x7E\xA1-\xDF]+$/)){
+                carboError.innerHTML =  'カーボ数は半角数字で入力してね'
+            }
+
+
         }
     }catch (error) {
         console.log(error);

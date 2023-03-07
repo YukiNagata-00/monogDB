@@ -59,9 +59,8 @@ window.onload = function () {
     //ログアウト
     let logout = document.getElementById('logout');
     logout.addEventListener('click', ()=>{
-        localStorage.removeItem("jwtToken");
         if (confirm("本当にログアウトして良いですか？")) {
-            console.log(1)
+            localStorage.removeItem("jwtToken");
             window.location.href = "intro";
           } else {
             console.log(0)

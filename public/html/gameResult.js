@@ -5,11 +5,14 @@ const selectString = parts[4];
 
 const afterBtn = document.getElementById('after')
 const beforeBtn = document.getElementById('before')
+
+let index = 0;
 const foodName = document.getElementById('foodName')
 const foodImg = document.getElementById('foodImg')
 
 let incorrect = JSON.parse(localStorage.getItem('incorrect'));
 console.log(incorrect)
+updateCard();
 
 fetch(`/game/${selectString}/score`)
     .then(response => response.json())
@@ -22,6 +25,35 @@ fetch(`/game/${selectString}/score`)
         console.error(error);
     });
 
+afterBtn.addEventListener('click', function(){
+    if(index+1==incorrect.length){
+        index = 0;
+    }else{
+        index++;
+    }
+
+    updateCard();
+
+})
+
+beforeBtn.addEventListener('click', function(){
+    if(index==0){
+        index = incorrect.length-1;
+    }else{
+        index--;
+    }
+    updateCard();
+})
+
+function updateCard(){
+    console.log(incorrect[index])
+    foodName.innerText = incorrect[index].name;
+    foodImg.src = '/images/foods/' + incorrect[index].image;
+}
+
+
+
+
 let select = document.getElementById("next")
 select.addEventListener('click', function () {
 
@@ -29,4 +61,3 @@ select.addEventListener('click', function () {
     window.location.href = "/home";
 
 })
-

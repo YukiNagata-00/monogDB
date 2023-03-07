@@ -5,13 +5,13 @@ const selectString = parts[4];
 
 const afterBtn = document.getElementById('after')
 const beforeBtn = document.getElementById('before')
-
+const carb = document.getElementById('carbNum')
+carb.hidden = true;
 let index = 0;
 const foodName = document.getElementById('foodName')
 const foodImg = document.getElementById('foodImg')
-
-let incorrect = JSON.parse(localStorage.getItem('incorrect'));
-console.log(incorrect)
+const card = document.getElementById('card')
+const incorrect = JSON.parse(localStorage.getItem('incorrect'));
 updateCard();
 
 fetch(`/game/${selectString}/score`)
@@ -25,10 +25,10 @@ fetch(`/game/${selectString}/score`)
         console.error(error);
     });
 
-afterBtn.addEventListener('click', function(){
-    if(index+1==incorrect.length){
+afterBtn.addEventListener('click', function () {
+    if (index + 1 == incorrect.length) {
         index = 0;
-    }else{
+    } else {
         index++;
     }
 
@@ -36,23 +36,42 @@ afterBtn.addEventListener('click', function(){
 
 })
 
-beforeBtn.addEventListener('click', function(){
-    if(index==0){
-        index = incorrect.length-1;
-    }else{
+beforeBtn.addEventListener('click', function () {
+    if (index == 0) {
+        index = incorrect.length - 1;
+    } else {
         index--;
     }
     updateCard();
 })
 
-function updateCard(){
-    console.log(incorrect[index])
+card.addEventListener('click', function () {
+    carb.innerText = incorrect[index].carbo;
+    if (carb.hidden == true) {
+        showBack()
+    } else {
+        showFront()
+    }
+
+})
+
+function updateCard() {
+    showFront()
     foodName.innerText = incorrect[index].name;
     foodImg.src = '/images/foods/' + incorrect[index].image;
 }
 
+function showFront() {
+    carb.hidden = true;
+    foodName.hidden = false;
+    foodImg.hidden = false;
+}
 
-
+function showBack() {
+    carb.hidden = false;
+    foodName.hidden = true;
+    foodImg.hidden = true;
+}
 
 let select = document.getElementById("next")
 select.addEventListener('click', function () {

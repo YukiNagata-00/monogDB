@@ -66,18 +66,27 @@ const addCard =
         }
     };
 
+//フラッシュカードを新しく作る
+    const addImage =
+        // //バリデーション　
+        // body('foodname').isLength({min: 1, max: 25 }).withMessage('ユーザー名は１~25文字にしてください'),
+        // body('iamge').isEmail().withMessage('正しいメールアドレスを入力してください'),
+        // body('carbo').isLength({min: 5, max: 20 }).withMessage('パスワードは5~20文字にしてください'),
 
-    const addImage = async(req, res) =>{
-        console.log("addImage")
-        try{
-            console.log(req.file);
-            res.send('ファイルのアップロードが完了しました。');
+        //カードの追加
+        async(req, res) =>{
+            console.log("addImage")
+            try{
+                console.log(req.file);
+                res.send('ファイルのアップロードが完了しました。');
+        
+            }catch(error){
+                console.error(error);
+                res.status(500).json({ error: 'Internal server error' });
+            }
+        };
+
     
-        }catch(error){
-            console.error(error);
-            res.status(500).json({ error: 'Internal server error' });
-        }
-    };
 
 
 const updateFavorite = async(req, res) => {

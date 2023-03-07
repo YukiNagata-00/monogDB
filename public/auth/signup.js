@@ -53,6 +53,7 @@ continueBtn.addEventListener('click', async function () {
 
         } else {
             const errorData = await res.json();
+            console.log(errorData);
             //errorData.errors.pop()
 
             for (let i = 0; i < errorData.errors.length; i++) {

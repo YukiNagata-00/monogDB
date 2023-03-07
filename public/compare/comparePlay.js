@@ -35,6 +35,7 @@ carb2.hidden = true;
 hint.hidden= false;
 let result = [];
 let score = 0;
+let incorrect= [];
 updateQuestion();
 
 document.getElementById('closeBtn').addEventListener('click', function () {
@@ -75,6 +76,8 @@ options.forEach(function (element) {
         } else {
             comment.innerText = "惜しい！";
             result.push('x');
+            incorrect.push(questions[index])
+            incorrect.push(questions[index+1])
         }
         
         afterAnswerArea.hidden = false;
@@ -106,6 +109,7 @@ next.addEventListener('click', () => {
         fetch('/game/select/score', params)
             .then(response => {
                 if (response.ok) {
+                    localStorage.setItem('incorrect',JSON.stringify(incorrect))
                     window.location.href = '/game/select/result';
                 }
             })

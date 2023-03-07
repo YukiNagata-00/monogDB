@@ -12,7 +12,9 @@ const options = document.querySelectorAll('.option');
 const afterAnswerArea = document.getElementById('after_answer');
 const comment = document.getElementById('comment');
 const next = document.getElementById('next');
+const hint= document.getElementById('hint');
 afterAnswerArea.hidden = true;
+hint.hidden= false;
 let result = [];
 let score = 0;
 let incorrect= [];
@@ -25,6 +27,7 @@ document.getElementById('closeBtn').addEventListener('click', function () {
 
 options.forEach(function (element) {
     element.addEventListener("click", function () {
+        hint.hidden= true;
         //選択肢クリック時に正誤判定し、選択肢に色をつけ、「次へ」ボタンと「コメント」を表示させる。
         options.forEach(elm => {
             console.log(elm.innerText)
@@ -149,6 +152,7 @@ function updateQuestion() {
         options[i].classList.remove('correct');
         options[i].classList.remove('miss');
     }
+    hint.hidden= false;
 
 }
 

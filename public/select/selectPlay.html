@@ -61,6 +61,70 @@
 
 
     </div>
+
+    <div class="w3-row " style=" position:relative;top:80px;">
+        <div class="w3-col l5">
+            <br>
+        </div>
+        <div id="hint" class="w3-col l2">
+            <button class="w3-button w3-hover-none w3-card w3-white"
+                style=" border-radius: 40px; text-align: center;position:relative;left:60px;">
+
+                <h4 onclick="document.getElementById('h').style.display='block'">ヒント</h4>
+            </button>
+        </div>
+        <div class="w3-col l5">
+            <br>
+        </div>
+
+    </div>
+
+
+    <div id='h' class="w3-modal">
+        <div class="w3-modal-content w3-animate-opacity">
+            <div class="w3-container w3-padding-25 w3-margin">
+                <span onclick="document.getElementById('h').style.display='none'"
+                    class="w3-button w3-display-topleft">&times;</span>
+                <div class="w3-padding-24 w3-responsive">
+                    <br>
+                    <table class="w3-table w3-bordered w3-border w3-padding w3-hoverable w3-centered"
+                        style="max-width:80%;margin:0 auto;">
+                        <tr class="w3-sand" style="font-size:20px; ">
+                            <th style="letter-spacing: 1px;">糖質の多い食品</th>
+                            <th style="letter-spacing: 1px;">糖質の少ない食品</th>
+                        </tr>
+                        <tr style="font-size:19px;">
+                            <td>お米・パン <br><img style="max-width:20%" alt="carb"
+                                    src="data:image/png;base64,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">
+                            </td>
+                            <td>肉・魚 <br><img style="max-width:20%" alt="carb"
+                                    src="https://png.pngtree.com/element_origin_min_pic/16/08/17/1357b3fc95b9c15.jpg">
+                            </td>
+                        </tr>
+                        <tr style="font-size:19px;">
+                            <td>くだもの <br><img style="max-width:20%" alt="carb"
+                                    src="https://static.vecteezy.com/system/resources/thumbnails/003/623/594/small_2x/red-apple-isolated-on-white-design-free-vector.jpg">
+                            </td>
+                            <td>油・バター<br><img style="max-width:25%" alt="carb"
+                                    src="https://static.vecteezy.com/system/resources/previews/003/987/968/original/butter-on-a-wooden-stand-a-piece-of-cut-butter-illustration-free-vector.jpg">
+                            </td>
+                        </tr>
+                        <tr style="font-size:19px;">
+                            <td>牛乳・乳製品 <br><img style="max-width:20%" alt="carb"
+                                    src="https://img.freepik.com/premium-vector/carton-milk-vector-cartoon-illustration_650087-134.jpg?w=2000">
+                            </td>
+                            <td>野菜 <br><img style="max-width:20%" alt="carb"
+                                    src="https://static.vecteezy.com/system/resources/previews/002/852/624/original/lettuce-sticker-on-white-background-free-vector.jpg">
+                            </td>
+                        </tr>
+                    </table>
+
+                    <br>
+                </div>
+
+            </div>
+        </div>
+    </div>
     <div id="after_answer" class="w3-padding">
         <h3 id="comment" style="position:relative;top:75px; text-align: center; max-width:30%; margin:0 auto;">comment</h3>
         <span id="next" style="font-size:40px; float:right;right:80px;position:relative" class=" material-symbols-outlined w3-button w3-hover-none w3-margin w3-padding">

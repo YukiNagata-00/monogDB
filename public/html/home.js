@@ -12,8 +12,8 @@ window.onload = function () {
 
     })
 
-    
-    document.querySelector('#flashcard_start').addEventListener('click', function() {
+    let flashcard = document.getElementById('flashcardBtn');
+    flashcard.addEventListener('click', function() {
         window.location.href = "/game/flashcard/start";
     });
 

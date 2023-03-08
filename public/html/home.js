@@ -14,22 +14,7 @@ window.onload = function () {
 
     
     document.querySelector('#flashcard_start').addEventListener('click', function() {
-    fetch('/game/flashcard/getFood')
-    .then(response => response.json())
-    .then(data => {
-        console.log('success');
-        localStorage.setItem("cards", JSON.stringify(data));
         window.location.href = "/game/flashcard/start";
-    })
-    
-    fetch('/game/flashcard/getAddCard')
-    .then(response => response.json())
-    .then(data => {
-        console.log('success');
-        localStorage.setItem("addcardfile", JSON.stringify(data));
-        window.location.href = "/game/flashcard/start";
-    })
-    .catch(error => console.error(error));
     });
 
 
@@ -62,9 +47,9 @@ window.onload = function () {
         if (confirm("本当にログアウトして良いですか？")) {
             localStorage.removeItem("jwtToken");
             window.location.href = "intro";
-          } else {
+        } else {
             console.log(0)
-          }
+        }
         
     })
 

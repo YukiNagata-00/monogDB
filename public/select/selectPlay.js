@@ -31,6 +31,7 @@ options.forEach(function (element) {
         //選択肢クリック時に正誤判定し、選択肢に色をつけ、「次へ」ボタンと「コメント」を表示させる。
         options.forEach(elm => {
             console.log(elm.innerText)
+            elm.disabled =true;
             if (parseFloat(elm.innerText) === parseFloat(questions[index].carbo)) {
                 elm.classList.add('correct')
             } else {
@@ -151,9 +152,9 @@ function updateQuestion() {
         afterAnswerArea.hidden = true;
         options[i].classList.remove('correct');
         options[i].classList.remove('miss');
+        options[i].disabled = false;
     }
     hint.hidden= false;
-
 }
 
 /**

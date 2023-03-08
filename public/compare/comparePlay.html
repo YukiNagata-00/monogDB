@@ -16,6 +16,15 @@
 
 
         }
+        button[disabled] {
+        opacity: 0.5;
+        background-color: #FFF3D8;
+        }
+
+        button[disabled]:not(:focus) {
+        opacity: 1;
+        background-color: inherit;
+        }
     </style>
 </head>
 
@@ -38,26 +47,26 @@
         <div class="w3-col l1 w3-hide-medium">
             <br>
         </div>
-        <div id="option1" style='height:100%;max-width:40%; border-radius: 40px;'
+        <button id="option1" style='height:100%;max-width:40%; border-radius: 40px;'
             class="option w3-button w3-hover-white w3-col l5 m6 s10 w3-card w3-white " class="w3-padding w3-margin">
 
             <h2 id="foodName1" class="w3-padding"></h2>
             <img id="foodImg1" style="max-width:60%;" class="w3-center" src="" alt="donut">
             <h1 id="foodCarb1" style="margin-top:80px;font-weight:550;"></h1>
             <br><br>
-        </div>
+        </button>
         <div class="w3-col l1">
             <br>
         </div>
 
-        <div id="option2" style='height:100%;max-width:40%; border-radius: 40px;'
+        <button id="option2" style='height:100%;max-width:40%; border-radius: 40px;'
             class="option w3-button w3-hover-white w3-col l5 m6 s10 w3-card w3-white " class="w3-padding w3-margin">
 
             <h2 id="foodName2" class="w3-padding"></h2>
             <img id="foodImg2" style="max-width:60%;" class="w3-center" src="" alt="donut">
             <h1 id="foodCarb2" style="margin-top:80px;font-weight:550;"></h1>
             <br><br>
-        </div>
+        </button>
 
     </div>
     <div class="w3-row " style=" position:relative;top:160px;">

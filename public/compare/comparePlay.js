@@ -60,6 +60,7 @@ options.forEach(function (element) {
         console.log(larger)
         //選択肢クリック時に正誤判定し、選択肢に色をつけ、「次へ」ボタンと「コメント」を表示させる。
         options.forEach(elm => {
+            elm.disabled = true;
             if (elm.innerText.trim() === larger) {
                 elm.classList.add('correct')
                 console.log("correct")
@@ -136,7 +137,7 @@ function updateQuestion() {
     foodImg2.src = '/images/foods/' + questions[index + 1].image;
 
     for (let i = 0; i < 2; i++) {
-
+        options[i].disabled = false;
         options[i].classList.remove('correct');
         options[i].classList.remove('miss');
     }

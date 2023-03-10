@@ -9,6 +9,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,600,1,0" />
     <title>Home</title>
+
     <style>
         body {
             background-color: #FFF9EB;
@@ -19,12 +20,45 @@
         h1 {
             font-size: 38px;
         }
+
+        .reveal {
+            position: relative;
+            transform: translateY(150px);
+            opacity: 0;
+            transition: 2s all ease;
+        }
+
+        .reveal.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
     </style>
+    <script>
+        window.onload(
+            function reveal() {
+                var reveals = document.getElementsByClassName("reveal");
+
+                for (var i = 0; i < reveals.length; i++) {
+                    var windowHeight = window.innerHeight;
+                    var elementTop = reveals[i].getBoundingClientRect().top;
+                    var elementVisible = 150;
+
+                    if (elementTop < windowHeight - elementVisible) {
+                        reveals[i].classList.add("active");
+                    } else {
+                        reveals[i].classList.remove("active");
+                    }
+                }
+            }
+
+        )
+        window.addEventListener("scroll", reveal);
+    </script>
 </head>
 
 <body>
     <div>
-       
+
         <div style="max-width:90%; margin:0 auto;" class="w3-row w3-padding">
             <div class="w3-col l4">
                 <h1 style="float:left;"><b>Carbomeee</b></h1>
@@ -36,21 +70,22 @@
             <div id="login" style="border-radius: 35px;background-color: #FDC988;
                 " class="w3-col l2 w3-button w3-margin w3-hover-none ">
 
-                <h3  style="font-size:20px;"><b>ログイン</b></h3>
+                <h3 style="font-size:20px;"><b>ログイン</b></h3>
             </div>
 
 
             <div id="signup" class="w3-col l2 w3-button w3-hover-none w3-margin"
                 style=" border-radius: 35px;background-color:#FDC988;">
-                <h3  style="font-size:20px;"><b>登録</b></h3>
+                <h3 style="font-size:20px;"><b>登録</b></h3>
             </div>
         </div>
-        
+
 
         <div style="max-width:80%; margin:0 auto;" class="w3-row w3-padding">
             <div class="w3-col l6">
-                <img style='height:600px;max-width:100%; border-radius:100px;object-fit: cover;' alt="person" src="https://www.simplyrecipes.com/thmb/UDoicxl-IjI0xR-jbVyWxrwRoP8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes_Donuts_LEAD_2-7dd819912994412481d53d00f11d02ed.jpg">
-            
+                <img style='height:600px;max-width:100%; border-radius:100px;object-fit: cover;' alt="person"
+                    src="https://www.simplyrecipes.com/thmb/UDoicxl-IjI0xR-jbVyWxrwRoP8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes_Donuts_LEAD_2-7dd819912994412481d53d00f11d02ed.jpg">
+
 
             </div>
             <div class="w3-col l6">
@@ -58,17 +93,47 @@
                 <h1 style="font-size:70px;font-weight:bold" class="w3-padding">Love Carbs?</h1>
                 <br>
                 <h1 style="font-size:70px;font-weight:bold" class="w3-padding">So do we.</h1>
-                
+
             </div>
 
         </div>
-        <div class="w3-section w3-margin w3-padding-24">
-            <h2 style="margin:90px; line-height:2.5">description about our app, and our aims and target audience description about our app, and our aims and target audience</h2>
+        <div class=" w3-section w3-margin w3-padding-24">
+            <h2 style="margin:90px; line-height:2.5" class="">description about our app, and our aims and target
+                audience description about our app, and our aims and target audience</h2>
         </div>
+
+        <div class="w3-row " style="max-width:80%; margin:0 auto;">
+            <div class="w3-col l5" style="background-color:#FDC988;
+            border-radius: 40px;max-width:90%; margin: 0 auto; height:500px;">
+
+
+            </div>
+            <div class="w3-col l2">
+                <br>
+
+            </div>
+            <div class="w3-col l5" style="background-color:#FDC988;
+            border-radius: 40px;max-width:90%; margin: 0 auto; height:500px;">
+
+            </div>
+        </div>
+        <br><br><br><br>
+
+        <div style="max-width:80%; margin:0 auto; height:300px;background-color:#FDC988;
+        border-radius: 40px;">
+
+        </div>
+        <br><br>
+        <div id="signup" class="w3-button w3-hover-none w3-margin"
+            style=" border-radius: 35px;background-color:#FDC988;">
+            <h3 style="font-size:20px;"class='w3-padding'><b>会員登録する！</b></h3>
+        </div>
+
 
     </div>
 
     <script src="/html/intro.js"></script>
+
 </body>
 
 </html>

@@ -30,6 +30,10 @@ const UserSchema = new mongoose.Schema({
         type: Array,
         default: [],
     },
+    addcards:{
+        type: Array,
+        default: [],
+    },
     lastLogin: {
         type: Date,
         default: Date

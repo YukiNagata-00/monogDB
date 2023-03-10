@@ -2,11 +2,13 @@ let addBtn = document.getElementById('okay')
 let foodnameError = document.getElementById('foodMessage')
 let imageError = document.getElementById('imageMessage')
 let carboError = document.getElementById('carboMessage')
+let tuika = document.getElementById('tuikaMessage')
 
 function clearAll(){
     foodnameError.innerHTML = ''
     imageError.innerHTML = ''
     carboError.innerHTML = ''
+    tuika.innerHTML = ''
 }
 
 
@@ -34,6 +36,12 @@ addBtn.addEventListener('click', async function (e){
     let  image = await imageinput.files[0].name;
     carbo = carbo.value;
     console.log(name);
+    if (name === null){
+        foodnameError.innerHTML= "食べ物の名前を入力してください"
+    }
+    if ( image === null){
+        imageError.innerHTML= "写真を追加してください"
+    }
 
     try{
         const res = await fetch('/game/flashcard/addcard2', {
@@ -61,11 +69,20 @@ addBtn.addEventListener('click', async function (e){
         if(res.ok){
             const data = await res.json();
             console.log('Registration successful', data);
-            alert("追加しました");
+            //なぜか効かないアラート
+           alert("追加しました");
+           tuika.innerHTML= "追加しました"
+
            
         }else{
 
-            
+            //バリデーション
+            if (name === null){
+                foodnameError.innerHTML= "食べ物の名前を入力してください"
+            }
+            if ( image === null){
+                imageError.innerHTML= "写真を追加してください"
+            }
             if (carbo.match(/^[^\x01-\x7E\xA1-\xDF]+$/)){
                 carboError.innerHTML =  'カーボ数は半角数字で入力してね'
             }

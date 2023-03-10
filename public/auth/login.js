@@ -52,6 +52,7 @@ let backBtn = document.getElementById('back')
 
 forgotBtn.addEventListener('click', function () {
     console.log('forgot password buttion clicked')
+    window.location.href = '/auth/forgot';
 })
 
 signupBtn.addEventListener('click', function () {

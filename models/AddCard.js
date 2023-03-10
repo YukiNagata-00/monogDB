@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const AddCardSchema = new mongoose.Schema({
-    name:{
+    foodname:{
         type: String
     },
     image:{ 

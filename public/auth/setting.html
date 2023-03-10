@@ -15,24 +15,42 @@
             color: #392E28;
         }
 
-        h3{
+        h3 {
             text-align: left;
             font-weight: 550;
-            font-size:22px;
+            font-size: 22px;
         }
     </style>
 </head>
 
 <body>
-    <div id="back">
-        <span style='font-size:36px; position:absolute;'
-            class="material-symbols-outlined w3-button w3-hover-none w3-left-align w3-margin">
-            arrow_back
-        </span>
+    <div class="w3-row">
+        <div id="back" class="w3-col l2">
+            <span style='font-size:36px;' class="material-symbols-outlined w3-button w3-hover-none w3-margin">
+                arrow_back
+            </span>
+        </div>
+        <div class="w3-col l8">
+            <p></p>
+        </div>
+
+        <div id="done" class="w3-col l1">
+            <span style='font-size:30px; ' class=" material-symbols-outlined w3-button w3-hover-none w3-margin">
+                done
+            </span>
+        </div>
+        <div id="edit" class="w3-col l1">
+            <span style='font-size:30px; ' class=" material-symbols-outlined w3-button w3-hover-none w3-margin">
+                edit
+            </span>
+        </div>
     </div>
 
+
+
     <div class="w3-padding" style="text-align: center;max-width:55%; margin: 0 auto;">
-        <h1 class="w3-padding-24" style="font-size:50px;"><b>設定</b></h1>
+        <h1 class="w3-padding" style="font-size:50px;"><b>設定</b></h1>
+
 
         <div class="w3-row w3-padding-24">
             <div class="w3-col l5">
@@ -40,8 +58,9 @@
             </div>
             <div class="w3-col l7">
 
-                <input id="username" style="border-width:4px;max-width:80%;border-radius: 35px;top:10px; position:relative;" class="w3-input"
-                type="text">
+                <input id="username"
+                    style="border-width:4px;max-width:80%;border-radius: 35px;top:10px; position:relative;"
+                    class="w3-input" type="text">
 
             </div>
         </div>
@@ -51,8 +70,9 @@
             </div>
             <div class="w3-col l7">
 
-                <input id="emailLogin" style="border-width:4px;max-width:80%;border-radius: 35px;top:10px; position:relative;" class="w3-input"
-                type="text">
+                <input id="emailLogin"
+                    style="border-width:4px;max-width:80%;border-radius: 35px;top:10px; position:relative;"
+                    class="w3-input" type="text">
             </div>
         </div>
 
@@ -61,8 +81,9 @@
                 <h3>スコア送信用メール :</h3>
             </div>
             <div class="w3-col l7">
-                <input id="emailScore" style="border-width:4px;max-width:80%;border-radius: 35px;top:10px; position:relative;" class="w3-input"
-                type="text">
+                <input id="emailScore"
+                    style="border-width:4px;max-width:80%;border-radius: 35px;top:10px; position:relative;"
+                    class="w3-input" type="text">
             </div>
         </div>
 
@@ -76,15 +97,26 @@
             </div>
             <div class="w3-col l7">
 
-                <input id="password" style="border-width:4px;max-width:80%;border-radius: 35px;top:10px; position:relative;" class="w3-input"
-                type="text">
+                <input id="password"
+                    style="border-width:4px;max-width:80%;border-radius: 35px;top:10px; position:relative;"
+                    class="w3-input" type="text">
+                    
+
+            </div>
+        </div>
+        <div class="w3-row w3-padding-24" id="new">
+            <div class="w3-col l5">
+                <h3>新しいパスワード :</h3>
+            </div>
+            <div class="w3-col l7">
+            
+                <input 
+                    style="border-width:4px;max-width:80%;border-radius: 35px;top:5px; position:relative;"
+                    class="w3-input" type="text" >
+
             </div>
 
-
         </div>
-
-    
-       
 
     </div>
 

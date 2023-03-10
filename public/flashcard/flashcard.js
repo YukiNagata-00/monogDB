@@ -1,7 +1,8 @@
 let user;
 const params = window.location.search;
 const foodId = new URLSearchParams(params).get("id");
-console.log(foodId);
+
+console.log(user);
 let foodData;
 let foodImg = document.getElementById("foodImg");
 let arrowRight = document.getElementById("arrow-right");

@@ -36,10 +36,10 @@ addBtn.addEventListener('click', async function (e){
     let  image = await imageinput.files[0].name;
     carbo = carbo.value;
     console.log(name);
-    if (name === null){
+    if (name === undefined){
         foodnameError.innerHTML= "食べ物の名前を入力してください"
     }
-    if ( image === null){
+    if ( image === undefined){
         imageError.innerHTML= "写真を追加してください"
     }
 

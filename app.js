@@ -7,7 +7,6 @@ const indexRoutes = require('./routes/index');
 const gameFlashcardRoutes = require('./routes/gameFlashcard')
 const authRoutes = require('./routes/auth')
 const settingRoutes = require('./routes/setting');
-
 // eslint-disable-next-line no-unused-vars
 const introRoutes = require('./routes/intro')
 

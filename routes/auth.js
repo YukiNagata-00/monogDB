@@ -18,6 +18,9 @@ router.get('/login', (req, res) => {
 router.get('/signup', (req, res) => {
     res.sendFile(path.join(__dirname, '../public', 'auth/signup.html'));
 });
+router.get('/forgot', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public', 'auth/forgot.html'));
+});
 
 router.post('/register', userRegister);
 router.post('/login', userLogin);

@@ -50,7 +50,8 @@ const getPlay = (req, res, next) =>{
 const addCardpage = (req, res, next) =>{
     res.sendFile(path.join(__dirname, '../public', '/flashcard/addFlashcard.html'));
 };
-const addCard =
+
+const addCard2 =
     //body('foodname').isLength({min: 1, max: 25 }).withMessage('食べ物名は１~25文字にしてください'),
 
     async(req, res) =>{
@@ -58,7 +59,11 @@ const addCard =
         try{
             //ユーザーの新規作成
             const add = await AddCard.create(req.body);
-            console.log(req.body);
+            const user = await User.findById(req.body.userId);
+            console.log(user)
+            const addId = add._id
+            console.log(addId)
+            await User.findByIdAndUpdate({_id : req.body.userId}, {$push: {addcards: addId}});
             res.send('カードを追加しました');
 
         }catch(err){
@@ -66,7 +71,7 @@ const addCard =
         }
     };
 
-//フラッシュカードを新しく作る
+//フラッシュカードの写真imageのアップロード
     const addImage =
         // //バリデーション　
         // body('foodname').isLength({min: 1, max: 25 }).withMessage('ユーザー名は１~25文字にしてください'),
@@ -161,7 +166,7 @@ module.exports = {
     getPlay,
     addCardpage,
     // getResult,
-    addCard,
+    addCard2,
     updateFavorite,
     addImage,
     getStartId,

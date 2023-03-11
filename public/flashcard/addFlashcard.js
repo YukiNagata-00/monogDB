@@ -1,3 +1,4 @@
+let user;
 let addBtn = document.getElementById('okay')
 let foodnameError = document.getElementById('foodMessage')
 let imageError = document.getElementById('imageMessage')
@@ -10,6 +11,9 @@ let carbo =document.getElementById('carbCount')
 let error= 0
 let error1 = 0
 let error2 = 0
+let error3 = 0
+
+//バリデーションの文字表示を空白にする
 function clearAll(){
     foodnameError.innerHTML = ''
     imageError.innerHTML = ''
@@ -18,8 +22,10 @@ function clearAll(){
     error = 0
     error1 = 0
     error2 = 0
+    error3 = 0
 }
 
+// バリデーション
 function errorfunction(){
     console.log(foodname.value)
     if(foodname.value === ""){
@@ -28,14 +34,45 @@ function errorfunction(){
     if(imageEx.value === ""){
        error1 ++; 
     }
-    if(carbo.value === "" || carbo.value.match(/^[0-9]+$/) !== "true"){
+    if(carbo.value === "" ){
        error2++
     }
+    if( carbo.value.match(/^[0-9]+$/) !== "true"){
+        error3++
+     }
     console.log(error)
 
 }
 
+//ログイン中のユーザー情報取得
+let token = localStorage.getItem('jwtToken');
 
+fetch('/auth/verify-token', {
+    method: 'POST',
+    headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+    }
+})
+.then(response => {
+    if (!response.ok) {
+        localStorage.removeItem("jwtToken");
+        window.location.href = "intro";
+    }
+    return response.json();
+})
+.then(data => {
+    user =data;
+    console.log(user)
+
+    
+})
+.catch(error => {
+    console.error('Error:', error);
+});
+
+
+//追加するをクリックしたら
 addBtn.addEventListener('click', async function (e){
     clearAll()
     
@@ -71,15 +108,18 @@ addBtn.addEventListener('click', async function (e){
         let  image = await imageinput.files[0].name;
         carbo = carbo.value;
         console.log(imageinput);
+        console.log(user.user._id)
+        
 
         try{
-            foodname = food.name.value;
+            foodname = foodname.value;
             const res = await fetch('/game/flashcard/addcard2', {
                 method: 'POST',
                 body :JSON.stringify({
                     foodname,
                     image,
-                    carbo
+                    carbo,
+                    userId: user.user._id
     
                 }),
                 headers: {
@@ -87,6 +127,7 @@ addBtn.addEventListener('click', async function (e){
                 },
             });
             console.log(res);
+            
             const addcardimage =
                 await fetch('/game/flashcard/addImage', {
                     method :'POST',
@@ -94,13 +135,7 @@ addBtn.addEventListener('click', async function (e){
         
         
                 });
-            const addcardIdAdd = await fetch('/game/flashcard/addcardId', {
-                method: 'POST',
-                body: JSON.stringify({ userId: user.user._id , foodId: foodData._id}),
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-            });
+
     
             
             if(res.ok){
@@ -134,30 +169,3 @@ back.addEventListener('click', function () {
 
 })
 
-
-
-fetch('/auth/verify-token', {
-    method: 'POST',
-    headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-    }
-})
-.then(response => {
-    if (!response.ok) {
-        localStorage.removeItem("jwtToken");
-        window.location.href = "intro";
-    }
-    return response.json();
-})
-.then(data => {
-    user =data;
-    console.log(user)
-    let foodId = user.user.favorites[foodIndex];
-    console.log(foodId)
-    getOneFood(foodId);
-    
-})
-.catch(error => {
-    console.error('Error:', error);
-});

@@ -63,22 +63,17 @@ const userLogin = [
             //DBからemailが一致するものを探す
             const user = await User.findOne({email: email});
             if(!user){
-                res.status(401).json({
+                return res.status(401).json({
                     errors:{
                         param: 'email',
                         message: 'emailが無効です'
                     }
                 })
             }
-            //passwordチェック
-            const hashedPassword = password.toString(CryptoJS.enc.Hex);
-            if(password !== hashedPassword){
-                res.status(401).json({
-                    errors:{
-                        param: 'password',
-                        message: 'passwordが一致しません'
-                    }
-                })
+
+            const password = CryptoJS.SHA256(req.body.password).toString();
+            if (user.password !== password) {
+                return res.status(401).json({ errors: [{ msg: 'メールアドレスが正しくありません。' }] });
             }
             //jwtの発行
             const token = jwt.sign({ id: user._id }, process.env.TOKEN_SECRET_KEY,  { expiresIn: '24h' });

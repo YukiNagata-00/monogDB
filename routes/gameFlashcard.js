@@ -20,7 +20,7 @@ const {
     getPlay,
     getAddCard,
     addCardpage,
-    addCard,
+    addCard2,
     updateFavorite,
     addImage,
     getStartId,
@@ -38,7 +38,7 @@ router.get('/getFood', getFood);
 router.get('/play', getPlay);
 router.get('/getAddCard', getAddCard);
 router.get('/addcard', addCardpage);
-router.post('/addcard2', addCard);
+router.post('/addcard2', addCard2);
 router.post('/updateFavorite',updateFavorite)
 router.post('/addImage', upload.single("image"), addImage);
 

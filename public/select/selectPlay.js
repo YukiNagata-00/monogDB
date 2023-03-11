@@ -141,7 +141,7 @@ function updateQuestion() {
     console.log(questions[index])
     foodName.innerText = questions[index].name;
     foodImg.src = '/images/foods/' + questions[index].image;
-    let fakeOptions = generateRandomNumbers(questions[index].carbo);
+    let fakeOptions = generateRandomNumbers(parseFloat( questions[index].carbo));
     fakeOptions.push(questions[index].carbo)
     fakeOptions.sort(function () {
         return 0.5 - Math.random();
@@ -164,14 +164,13 @@ function updateQuestion() {
  */
 function generateRandomNumbers(num) {
     let minValue = Math.max(num - 8.9, 0);
-    let maxValue = Math.min(num + 8.9, 10);
+    let maxValue = Math.min(num + 8.9, 13);
 
-    let randomNum1 = parseFloat((Math.random() * (maxValue - minValue) + minValue).toFixed(1));
-
-    let randomNum2;
+    let randomNum1, randomNum2;
     do {
+        randomNum1 = parseFloat((Math.random() * (maxValue - minValue) + minValue).toFixed(1));
         randomNum2 = parseFloat((Math.random() * (maxValue - minValue) + minValue).toFixed(1));
-    } while (randomNum2 === randomNum1);
+    } while (Math.abs(randomNum1 - num) < 2 || Math.abs(randomNum2 - num) < 2 || Math.abs(randomNum1 - randomNum2) < 2);
 
     return [randomNum1, randomNum2];
 }

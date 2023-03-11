@@ -5,6 +5,7 @@ const { body, validationResult } = require('express-validator');
 const validation = require('../handlers/validatioin');
 const tokenHandler = require('../handlers/tokenHandler');
 const  fetchInstance  = require('./fetchInstance.js');
+
 //ユーザー登録API
 const userRegister =  [
     //バリデーション
@@ -37,8 +38,8 @@ const userRegister =  [
     const password = req.body.password;
     try{
 
-        //パスワードハッシュ化
-        req.body.password = CryptoJS.SHA256(password);
+        //パスワード暗号化
+        req.body.password = CryptoJS.AES.encrypt(password, process.env.PASSWORD_KEY);
         //ユーザーの新規作成
         const user = await User.create(req.body);
         //jwt
@@ -53,8 +54,8 @@ const userRegister =  [
 
 //ログインAPI
 const userLogin = [
-    body('email').isEmail().withMessage('正しいメールアドレスを入力してください'),
-    body('password').isLength({min: 5, max: 20 }).withMessage('正しいパスワードを入力してください'),
+    body('email').isEmail().withMessage('正しいメールアドレスを入力してね'),
+    body('password').isLength({min: 5, max: 20 }).withMessage('正しいパスワードを入力してね'),
     validation.validate,
 
     async(req, res)=>{
@@ -63,20 +64,20 @@ const userLogin = [
             //DBからemailが一致するものを探す
             const user = await User.findOne({email: email});
             if(!user){
-                res.status(401).json({
+                return res.status(401).json({
                     errors:{
                         param: 'email',
-                        message: 'emailが無効です'
+                        message: 'emailが違うよ'
                     }
                 })
             }
-            //passwordチェック
-            const hashedPassword = password.toString(CryptoJS.enc.Hex);
-            if(password !== hashedPassword){
-                res.status(401).json({
+            //パスワード認証
+            const decryptedPassword = CryptoJS.AES.decrypt(user.password, process.env.PASSWORD_KEY).toString(CryptoJS.enc.Utf8);
+            if(password !== decryptedPassword){
+                return res.status(401).json({
                     errors:{
                         param: 'password',
-                        message: 'passwordが一致しません'
+                        message: 'パスワードが違うよ'
                     }
                 })
             }
@@ -86,7 +87,7 @@ const userLogin = [
             return res.status(201).json({user, token});
         
         }catch(err){
-            res.status(500).json({
+            return res.status(500).json({
                 errors:{
                     param: 'database',
                     message: 'データベースエラーが発生しました'
@@ -136,46 +137,81 @@ const updateUserInfo = [
     //バリデーション
     body('username').isLength({min: 1, max: 25 }).withMessage('ユーザー名は１~25文字にしてください'),
     body('email').isEmail().withMessage('正しいメールアドレスを入力してください'),
-    body('email2').isEmail().withMessage('正しいメールアドレスを入力してください'),
-    body('newPassword').isLength({min: 5, max: 20 }).withMessage('パスワードは5~20文字にしてください'),
-    body('email').custom(async (value, { req }) => {
-        try {
-            const user = await User.findOne({ email: value });
-        if (user && user._id.toString() !== req.body.userId) {
-            throw new Error("このメールアドレスはすでに使われています");
+    body('email2')
+    .optional()
+    .custom((value, { req }) => {
+        if (value && !validator.isEmail(value)) {
+        throw new Error('正しいメールアドレスを入力してください');
         }
         return true;
-        } catch (err) {
-            throw new Error("Server Error");
+    }).withMessage('正しいメールアドレスを入力してください'),
+    (req, res, next) => {
+        if (req.body.newPassword) {
+            body('newPassword').isLength({min: 5, max: 20 }).withMessage('パスワードは5~20文字にしてください')(req, res, next);
+        } else {
+            next();
         }
-    }),
+    },
+    body('email').custom(async (value, { req }) => {
+        try {
+            const user = await User.findById(req.body.userId);
+            if (user.email === value) {
+                return true;
+            }
+            const userWithEmail = await User.findOne({ email: value });
+            if (userWithEmail && userWithEmail._id.toString() !== req.body.userId) {
+                throw new Error('このメールアドレスはすでに使われています');
+            }
+            return true;
+        } catch (err) {
+            console.log(err)
+            throw new Error('Server Errore', err);
+        }
+    }).withMessage('このメールアドレスはすでに使われています'),
     validation.validate,
     async (req, res) => {
-        const currentPassword = req.body.currentPassword;
+        let currentPassword = req.body.currentPassword;
         const newPassword = req.body.newPassword;
-    try {
-        //現在のパスワードがあっているかチェック
-            const user = await User.findById(req.body.userId);
-            const currentPasswordHash = CryptoJS.SHA256(currentPassword).toString();
-        if (currentPasswordHash !== user.password) {
-            return res.status(401).json({ message: '現在のパスワードがまちがっています' });
+
+        if (currentPassword && !newPassword) {
+            return res.status(400).json({ message: '新しいパスワードを入力してください' });
+        } else if (!currentPassword && newPassword) {
+            return res.status(400).json({ message: '現在のパスワードを入力してください' });
         }
-        // 新しいパスワードをハッシュ化
-        const newPasswordHash = CryptoJS.SHA256(newPassword).toString();
-        const updatedUser = await User.findByIdAndUpdate(req.body.userId, {
-            $set: {
-                username: req.body.username,
-                email: req.body.email, 
-                email2: req.body.email2,
-                password: newPasswordHash,
-            },
-        });
-        // JWT token
-        const token = jwt.sign({ id: updatedUser._id }, process.env.TOKEN_SECRET_KEY, { expiresIn: '24h' });
-        return res.status(200).json({ user: updatedUser, token });
-    } catch (err) {
-        return res.status(500).json(err);
-    }
+        try {
+            
+            //現在のパスワードがあっているかチェック
+                const user = await User.findById(req.body.userId);
+                
+                if (currentPassword) {
+                     //パスワード認証
+                    const decryptedPassword = CryptoJS.AES.decrypt(user.password, process.env.PASSWORD_KEY).toString(CryptoJS.enc.Utf8);
+                    if(currentPassword !== decryptedPassword){
+                        return res.status(401).json({
+                            errors:{
+                                param: 'password',
+                                message: '現在のパスワードが違うよ'
+                            }
+                        })
+                    }
+                }
+            // 新しいパスワードをハッシュ化
+            const encryptedPassword = CryptoJS.AES.encrypt(newPassword, process.env.PASSWORD_KEY).toString();
+            const updatedUser = await User.findByIdAndUpdate(req.body.userId, {
+                $set: {
+                    username: req.body.username,
+                    email: req.body.email, 
+                    email2: req.body.email2,
+                    password: encryptedPassword,
+                },
+            });
+            // JWT token
+            const token = jwt.sign({ id: updatedUser._id }, process.env.TOKEN_SECRET_KEY, { expiresIn: '24h' });
+            return res.status(200).json({ user: updatedUser, token });
+        } catch (err) {
+            console.log(err)
+            return res.status(500).json({ err: 'Internal server error' });
+        }
     },
 ];
 

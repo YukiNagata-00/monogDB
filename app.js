@@ -43,19 +43,19 @@ app.use('/setting', settingRoutes);
 app.use("/intro",introRoutes )
 
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
+//import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyC_2IZI-p_v5KZUdIvebshc1VJ2S-VuGV0",
-  authDomain: "carbomee.firebaseapp.com",
-  projectId: "carbomee",
-  storageBucket: "carbomee.appspot.com",
-  messagingSenderId: "783415692002",
-  appId: "1:783415692002:web:08ec31dfc61dcb7dfc2cbb"
-};
+// const firebaseConfig = {
+//   apiKey: "AIzaSyC_2IZI-p_v5KZUdIvebshc1VJ2S-VuGV0",
+//   authDomain: "carbomee.firebaseapp.com",
+//   projectId: "carbomee",
+//   storageBucket: "carbomee.appspot.com",
+//   messagingSenderId: "783415692002",
+//   appId: "1:783415692002:web:08ec31dfc61dcb7dfc2cbb"
+// };
 
-// Initialize Firebase
-const app1 = initializeApp(firebaseConfig);
+// // Initialize Firebase
+// const app1 = initializeApp(firebaseConfig);

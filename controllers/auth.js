@@ -81,7 +81,7 @@ const userLogin = [
             return res.status(201).json({user, token});
         
         }catch(err){
-            res.status(500).json({
+            return res.status(500).json({
                 errors:{
                     param: 'database',
                     message: 'データベースエラーが発生しました'
@@ -131,19 +131,37 @@ const updateUserInfo = [
     //バリデーション
     body('username').isLength({min: 1, max: 25 }).withMessage('ユーザー名は１~25文字にしてください'),
     body('email').isEmail().withMessage('正しいメールアドレスを入力してください'),
-    body('email2').isEmail().withMessage('正しいメールアドレスを入力してください'),
-    body('newPassword').isLength({min: 5, max: 20 }).withMessage('パスワードは5~20文字にしてください'),
-    body('email').custom(async (value, { req }) => {
-        try {
-            const user = await User.findOne({ email: value });
-        if (user && user._id.toString() !== req.body.userId) {
-            throw new Error("このメールアドレスはすでに使われています");
+    body('email2')
+    .optional()
+    .custom((value, { req }) => {
+        if (value && !validator.isEmail(value)) {
+        throw new Error('正しいメールアドレスを入力してください');
         }
         return true;
-        } catch (err) {
-            throw new Error("Server Error");
+    }).withMessage('正しいメールアドレスを入力してください'),
+    (req, res, next) => {
+        if (req.body.newPassword) {
+            body('newPassword').isLength({min: 5, max: 20 }).withMessage('パスワードは5~20文字にしてください')(req, res, next);
+        } else {
+            next();
         }
-    }),
+    },
+    body('email').custom(async (value, { req }) => {
+        try {
+            const user = await User.findById(req.body.userId);
+            if (user.email === value) {
+                return true;
+            }
+            const userWithEmail = await User.findOne({ email: value });
+            if (userWithEmail && userWithEmail._id.toString() !== req.body.userId) {
+                throw new Error('このメールアドレスはすでに使われています');
+            }
+            return true;
+        } catch (err) {
+            console.log(err)
+            throw new Error('Server Errore', err);
+        }
+    }).withMessage('このメールアドレスはすでに使われています'),
     validation.validate,
     async (req, res) => {
         const currentPassword = req.body.currentPassword;

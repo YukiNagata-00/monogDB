@@ -2,14 +2,12 @@
 
 ### Developed by Aimi, Yuki and Marie
 
+### A carb counting game app for people with type 1 diabetes.
 
-####English.ver
-####A carb counting game app for people with type 1 diabetes.
+## Tech stack
 
-####Tech stack
-####
 
-####Japanese.ver
+
 
 
 

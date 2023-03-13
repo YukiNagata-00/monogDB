@@ -177,41 +177,50 @@ const updateUserInfo = [
             return res.status(400).json({ message: '新しいパスワードを入力してください' });
         } else if (!currentPassword && newPassword) {
             return res.status(400).json({ message: '現在のパスワードを入力してください' });
-        }
-        try {
+        }else{
+            try {
             
-            //現在のパスワードがあっているかチェック
-                const user = await User.findById(req.body.userId);
-                
-                if (currentPassword) {
-                     //パスワード認証
-                    const decryptedPassword = CryptoJS.AES.decrypt(user.password, process.env.PASSWORD_KEY).toString(CryptoJS.enc.Utf8);
-                    if(currentPassword !== decryptedPassword){
+                //現在のパスワードがあっているかチェック
+                    const user = await User.findById(req.body.userId);
+                    
+                    if (user) {
+                         //パスワード認証
+                        const decryptedPassword = CryptoJS.AES.decrypt(user.password, process.env.PASSWORD_KEY).toString(CryptoJS.enc.Utf8);
+                        if(currentPassword !== decryptedPassword){
+                            return res.status(401).json({
+                                errors:{
+                                    param: 'password',
+                                    message: '現在のパスワードが違います'
+                                }
+                            })
+                        }
+                    }else{
                         return res.status(401).json({
                             errors:{
                                 param: 'password',
-                                message: '現在のパスワードが違うよ'
+                                message: '現在のパスワードが違います'
                             }
                         })
                     }
-                }
-            // 新しいパスワードをハッシュ化
-            const encryptedPassword = CryptoJS.AES.encrypt(newPassword, process.env.PASSWORD_KEY).toString();
-            const updatedUser = await User.findByIdAndUpdate(req.body.userId, {
-                $set: {
-                    username: req.body.username,
-                    email: req.body.email, 
-                    email2: req.body.email2,
-                    password: encryptedPassword,
-                },
-            });
-            // JWT token
-            const token = jwt.sign({ id: updatedUser._id }, process.env.TOKEN_SECRET_KEY, { expiresIn: '24h' });
-            return res.status(200).json({ user: updatedUser, token });
-        } catch (err) {
-            console.log(err)
-            return res.status(500).json({ err: 'Internal server error' });
+                // 新しいパスワードをハッシュ化
+                const encryptedPassword = CryptoJS.AES.encrypt(newPassword, process.env.PASSWORD_KEY).toString();
+                const updatedUser = await User.findByIdAndUpdate(req.body.userId, {
+                    $set: {
+                        username: req.body.username,
+                        email: req.body.email, 
+                        email2: req.body.email2,
+                        password: encryptedPassword,
+                    },
+                });
+                // JWT token
+                const token = jwt.sign({ id: updatedUser._id }, process.env.TOKEN_SECRET_KEY, { expiresIn: '24h' });
+                return res.status(200).json({ user: updatedUser, token });
+            } catch (err) {
+                console.log(err)
+                return res.status(500).json({ err: 'Internal server error' });
+            }
         }
+
     },
 ];
 

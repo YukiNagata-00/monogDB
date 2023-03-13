@@ -10,26 +10,37 @@ let arrowLeft = document.getElementById("arrow-left");
 let foodName = document.getElementById("foodName");
 let ura = document.getElementById("ura");
 
-function getOneFood(foodId){
-    fetch(`/game/flashcard/getOneFood?foodId=${foodId}`, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json' }
+
+//ログイン中のユーザー情報取得
+let token = localStorage.getItem('jwtToken');
+
+    fetch('/auth/verify-token', {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
     })
     .then(response => {
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            localStorage.removeItem("jwtToken");
+            window.location.href = "intro";
         }
         return response.json();
     })
     .then(data => {
-        foodData = data;
-        console.log(foodData);
-        showCard();
+        user =data;
+        console.log(user)
+        let foodId = user.user.addcards[foodIndex];
+        console.log(foodId)
+        getOneFood(foodId);
+        
     })
     .catch(error => {
         console.error('Error:', error);
     });
-}
+
+
 
 // //カードを表示させる機能
 function showCard(){
@@ -37,7 +48,7 @@ function showCard(){
         console.log('foodData is undefined');
         return;
     }
-    foodName.innerText =foodData.name ;
+    foodName.innerText =foodData.foodname ;
     ura.innerText =foodData.carbo ;
     foodImg.src = '/images/foods/' + foodData.image; 
 
@@ -77,7 +88,7 @@ arrowRight.addEventListener('click', function(){
 .then(data => {
     user =data;
     console.log(user)
-    let foodId = user.user.favorites[foodIndex];
+    let foodId = user.user.addcards[foodIndex];
     console.log(foodId)
     getOneFood(foodId);
     
@@ -107,7 +118,7 @@ arrowLeft.addEventListener('click', function(){
 .then(data => {
     user =data;
     console.log(user)
-    let foodId = user.user.favorites[foodIndex];
+    let foodId = user.user.addcards[foodIndex];
     console.log(foodId)
     getOneFood(foodId);
     
@@ -116,34 +127,5 @@ arrowLeft.addEventListener('click', function(){
     console.error('Error:', error);
 });
 });
-
-//ログイン中のユーザー情報取得
-let token = localStorage.getItem('jwtToken');
-
-    fetch('/auth/verify-token', {
-        method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => {
-        if (!response.ok) {
-            localStorage.removeItem("jwtToken");
-            window.location.href = "intro";
-        }
-        return response.json();
-    })
-    .then(data => {
-        user =data;
-        console.log(user)
-        let foodId = user.user.favorites[foodIndex];
-        console.log(foodId)
-        getOneFood(foodId);
-        
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
 
 

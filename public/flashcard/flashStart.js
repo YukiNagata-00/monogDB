@@ -20,6 +20,12 @@
         window.location.href = '/game/flashcard/favorite';
 
     })
+
+    let addshow = document.getElementById("addshowBtn")
+    addshow.addEventListener('click', function () {
+        window.location.href = '/game/flashcard/adds';
+
+    })
     let addcard = document.getElementById("addcardBtn")
     addcard.addEventListener('click', function () {
         window.location.href = '/game/flashcard/addcard';

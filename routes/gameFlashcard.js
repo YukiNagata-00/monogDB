@@ -15,6 +15,7 @@ const storage = multer.diskStorage({
 const router = express.Router();
 const {
     getfavoritePage,
+    getaddshowpage,
     getStart,
     getFood,
     getPlay,
@@ -29,6 +30,7 @@ const {
     getPreviousFood
 } = require('../controllers/flashcardGame');
 router.get('/favorite', getfavoritePage)
+router.get('/adds', getaddshowpage)
 router.get('/getStartId', getStartId)
 router.get('/getNextFood', getNextFood)
 router.get('/getOneFood', getOneFood)

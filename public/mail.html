@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,600,1,0" />
-    <title>Home</title>
+    <title>mail</title>
     <style>
         body {
-            background-color: #FFF9EB;
+            background-color: white;
 
             color: #392E28;
             text-align: center;
@@ -20,42 +20,71 @@
         }
 
         h1 {
-            font-size: 58px;
+            font-size: 65px;
         }
     </style>
 </head>
 
 <body>
-    <div>
+    <div style="max-width:70%; margin:0 auto;background-color: #FFF9EB;">
         <div style="max-width:90%; margin:0 auto;position:relative" class="  w3-padding">
-            <h1 style=""><b>Carbomeee</b></h1>
-            
+            <br>
+            <h1 class="w3-wide"><b>Carbomeee</b></h1>
+            <br>
+            <h2>アプリのご使用ありがとうございます！</h2><br><br>
         </div>
-        
-       
-        <div style="max-width:70%; margin:0 auto;" class="w3-row">
-            <div class="w3-col l1">
-                <br>
+        <div class='w3-padding-24 ' style="max-width:90%; margin:0 auto;border-radius: 35px;background-color:#FFF3D8;">
+
+            <h2 style="font-size: 35px;"><b><span id="username"></span>様の１週間レポート</b></h2><br>
+            <br>
+            <div class="w3-row " style="max-width:30%; margin:0 auto;"> 
+                <div class="w3-col l7">
+                    <h2 style="font-size:25px;">ログイン数 : </h2>
+                </div>
+                <div class="w3-col l5">
+                    <h2 id="loginNum" style="font-size:35px;"><b></b> </h2>
+                </div>
+
             </div>
-            <div id="selectBtn" style="max-width:80%; border-radius: 35px;background-color: #FDC988;
-                " class="w3-col l3 w3-button w3-hover-white w3-margin">
+            <br>
 
-                <h2 class="w3-margin" style="font-size:27px;">選択</h2>
+            <div style="max-width:100%; margin:0 auto;" class="w3-row w3-padding">
+                <div class="w3-col l1">
+                    <br>
+                </div>
+                <div id="selectBtn" style="height:250px;max-width:85%; border-radius: 45px;background-color: #FDC988;
+                    " class="w3-col l3 w3-margin">
+
+                    <h2 class="w3-margin" style="font-size:25px;">選択ゲーム</h2>
+                
+                    <h2 id="selectNum" style="font-size:40px;"><b>5</b></h2>
+                    <br>
+                    <h4>回プレイ</h4>
+                </div>
+
+
+                <div id="compareBtn" class="w3-col l3  w3-margin"
+                    style="height:250px;max-width:85%;  border-radius: 45px;background-color:#C1DEBB;">
+                    <h2 class="w3-margin" style="font-size:25px;">比較ゲーム</h2>
+                    <h2 id="compareNum" style="font-size:40px;"><b>5</b></h2>
+                    <br>
+                    <h4>回プレイ</h4>
+                </div>
+
+
+                <div id="flashcardBtn" class="w3-col l3  w3-margin"
+                    style="height:250px;max-width:80%;  border-radius: 45px;background-color:#E8C5B2;">
+                    <h2 class="w3-margin" style="font-size:25px;" id="flashcard_start">カード</h2>
+                    <h2 id="fcNum" style="font-size:40px;"><b>5</b></h2>
+                    <br>
+                    <h4>回プレイ</h4>
+                </div>
+
             </div>
-
-
-            <div id="compareBtn" class="w3-col l3 w3-button w3-hover-white w3-margin"
-                style="max-width:80%;  border-radius: 35px;background-color:#C1DEBB;">
-                <h2 class="w3-margin" style="font-size:27px;">比較</h2>
-            </div>
-
-
-            <div id="flashcardBtn" class="w3-col l3 w3-button w3-hover-white w3-margin"
-                style="max-width:80%;  border-radius: 35px;background-color:#E8C5B2;">
-                <h2 class="w3-margin" style="font-size:27px;" id="flashcard_start">練習</h2>
-            </div>
-
         </div>
+        <br><br><br>
+
+
 
     </div>
 

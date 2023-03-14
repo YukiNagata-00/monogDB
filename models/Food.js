@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const FoodSchema = new mongoose.Schema({
-    name:{
+    foodname:{
         type: String
     },
     image:{ 
@@ -9,6 +9,9 @@ const FoodSchema = new mongoose.Schema({
     },
     carbo:{
         type: Number
+    },
+    username:{
+        type: String
     }
 })
 

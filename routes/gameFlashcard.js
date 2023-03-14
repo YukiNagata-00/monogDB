@@ -2,7 +2,7 @@ const express = require("express");
 const multer = require("multer");
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, 'public/images/')
+      cb(null, 'public/images/foods')
     },
     filename: function (req, file, cb) {
         const unixTime = new Date().getTime();
@@ -27,7 +27,8 @@ const {
     getStartId,
     getOneFood,
     getNextFood,
-    getPreviousFood
+    getPreviousFood,
+  //  getAllFood
 } = require('../controllers/flashcardGame');
 router.get('/favorite', getfavoritePage)
 router.get('/adds', getaddshowpage)
@@ -43,5 +44,6 @@ router.get('/addcard', addCardpage);
 router.post('/addcard2', addCard2);
 router.post('/updateFavorite',updateFavorite)
 router.post('/addImage', upload.single("image"), addImage);
+//router.post('/allfood',getALLFood)
 
 module.exports = router;

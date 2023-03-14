@@ -35,6 +35,7 @@ carb2.hidden = true;
 hint.hidden= false;
 let result = [];
 let score = 0;
+let incorrect= [];
 updateQuestion();
 
 document.getElementById('closeBtn').addEventListener('click', function () {
@@ -58,6 +59,7 @@ options.forEach(function (element) {
         console.log(larger)
         //選択肢クリック時に正誤判定し、選択肢に色をつけ、「次へ」ボタンと「コメント」を表示させる。
         options.forEach(elm => {
+            elm.disabled = true;
             if (elm.innerText.trim() === larger) {
                 elm.classList.add('correct')
                 console.log("correct")
@@ -74,6 +76,8 @@ options.forEach(function (element) {
         } else {
             comment.innerText = "惜しい！";
             result.push('x');
+            incorrect.push(questions[index])
+            incorrect.push(questions[index+1])
         }
         
         afterAnswerArea.hidden = false;
@@ -105,6 +109,7 @@ next.addEventListener('click', () => {
         fetch('/game/select/score', params)
             .then(response => {
                 if (response.ok) {
+                    localStorage.setItem('incorrect',JSON.stringify(incorrect))
                     window.location.href = '/game/select/result';
                 }
             })
@@ -131,6 +136,7 @@ function updateQuestion() {
     foodImg2.src = '/images/foods/' + questions[index + 1].image;
 
     for (let i = 0; i < 2; i++) {
+        options[i].disabled = false;
 
         options[i].classList.remove('correct');
         options[i].classList.remove('miss');
@@ -140,5 +146,6 @@ function updateQuestion() {
     carb2.hidden = true;
     foodImg1.hidden = false;
     foodImg2.hidden = false;
+    hint.hidden= false;
 
 }

@@ -139,7 +139,7 @@ next.addEventListener('click', () => {
 
 function updateQuestion() {
     console.log(questions[index])
-    foodName.innerText = questions[index].name;
+    foodName.innerText = questions[index].foodname;
     foodImg.src = '/images/foods/' + questions[index].image;
     let fakeOptions = generateRandomNumbers(parseFloat( questions[index].carbo));
     fakeOptions.push(questions[index].carbo)

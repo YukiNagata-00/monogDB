@@ -119,8 +119,19 @@ const updateFavorite = async(req, res) => {
     }
 }
 
+const getStartallId = (req, res)=>{
+    Food.findOne({}, '_id', ).sort({_id: 1}).exec((error, food)=>{
+        if (error) {
+            console.log(error);
+            res.status(500).send({ error: 'An error occurred' });
+        }
+        res.json(food);
+    })
+}
+
+//基本カードのidのみ
 const getStartId = (req, res)=>{
-    Food.findOne({}, '_id').sort({_id: 1}).exec((error, food)=>{
+    Food.findOne({username:"all"}).sort({_id: 1}).exec((error, food)=>{
         if (error) {
             console.log(error);
             res.status(500).send({ error: 'An error occurred' });
@@ -141,21 +152,21 @@ const getOneFood = (req, res) => {
 
 const getNextFood = async(req, res) =>{
     const foodId = req.query.foodId;
-    const nextFood = await Food.findOne({ _id: { $gt: foodId } });
+    const nextFood = await Food.findOne({username:"all", _id: { $gt: foodId } });
     if (!nextFood) {
         res.status(404).send('Next food not found');
         return;
     }
-    res.status(200).send({ nextFoodId: nextFood._id });
+    res.status(200).send({ nextFoodId: nextFood._id , nextUsername: nextFood.username});
 }
 const getPreviousFood = async(req, res) =>{
     const foodId = req.query.foodId;
-    const previousFood = await Food.findOne({ _id: { $lt: foodId } }).sort({ _id: -1 });
+    const previousFood = await Food.findOne({username: "all", _id: { $lt: foodId } }).sort({ _id: -1 });
     if (!previousFood) {
         res.status(404).send('Next food not found');
         return;
     }
-    res.status(200).send({ previousFoodId: previousFood._id });
+    res.status(200).send({ previousFoodId: previousFood._id ,previousUsername: previousFood.username});
 }
 
 

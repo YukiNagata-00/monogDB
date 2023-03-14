@@ -1,0 +1,99 @@
+body{
+    
+    background-color: #FFF3D8;
+    display: grid;
+    
+    grid-template-rows: 1fr 5fr 1fr 1fr;
+    grid-template: 
+       "header header  header header" 0.5fr 
+       "...   main    main   ..."   4fr
+       "...   arrow1  arrow2 ..."  1fr 
+       "footer footer footer  footer" 1fr/
+       2fr 2fr 2fr  2fr;;
+  }
+  
+  header{
+  
+    grid-area: header;
+  }
+  .backarrow{
+    cursor: pointer;  
+
+  }
+  .scene card{
+    border: 1px solid #CCC;
+    perspective: 600px;
+    position: relative;
+  }
+  .card{
+    border-radius: 20px;
+    background-color:white;
+    grid-area: main;
+    margin: 10px;
+    text-align:center;
+    max-height:500px;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+    cursor: pointer;    
+  }
+  
+  main.is-flipped {
+    transform: rotateY(180deg);
+  }
+  
+  h1{
+    text-align:center;
+  }
+  .card-main-omote, .card-main-ura{
+    backface-visibility: hidden; /*裏向きを非表示*/
+    -webkit-backface-visibility: hidden;
+  
+  }
+  
+  
+  .card-main-ura{
+  
+    position:absolute;
+    font-size:50px;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:white;
+    text-align:center;
+  
+  
+    transform: rotateY( 180deg );
+  }
+  
+  .arrow-left{
+  
+    margin: 11px;
+    padding:15px;
+    border-radius: 20px;
+    background-color:white;
+    grid-area: arrow1;
+    text-align:center;
+    place-items: center;
+    transition: all .2s;
+    
+  }
+  .arrow-left:hover{
+    background-color: #ffca57;
+  }
+  
+  .arrow-right{
+  
+    margin: 10px;
+    padding:15px;
+    border-radius: 15px;
+    background-color:white;
+    grid-area: arrow2;
+    text-align:center;
+    place-items: center;
+    transition: all .2s;
+  }
+  .arrow-right:hover{
+    background-color: #ffca57;
+  }
+  
+  

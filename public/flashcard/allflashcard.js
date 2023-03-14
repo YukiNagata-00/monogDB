@@ -1,10 +1,8 @@
 let user;
 const params = window.location.search;
 const foodId = new URLSearchParams(params).get("id");
-const username = new URLSearchParams(params).get("user");
 
-console.log(foodId);
-console.log(username);
+console.log(user);
 let foodData;
 let foodImg = document.getElementById("foodImg");
 let arrowRight = document.getElementById("arrow-right");
@@ -15,7 +13,7 @@ let heart = document.getElementById("heart");
 
 
 function getOneFood(){
-    fetch(`/game/flashcard/getOneFood?user=${username}&foodId=${foodId}`, {
+    fetch(`/game/flashcard/getOneFood?foodId=${foodId}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
     })
@@ -43,7 +41,7 @@ function showCard(){
         return;
     }
 
-    foodName.innerText =foodData.foodname ;
+    foodName.innerText =foodData.name ;
     ura.innerText =foodData.carbo ;
     foodImg.src = '/images/foods/' + foodData.image; 
 
@@ -101,7 +99,7 @@ back.addEventListener('click', function () {
 
 // //右矢印をクリックしたら次のカードへうつる
 arrowRight.addEventListener('click', function(){
-    fetch(`/game/flashcard/getNextFood?user=${username}&foodId=${foodId}`, {
+    fetch(`/game/flashcard/getNextFood?foodId=${foodId}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
     })
@@ -114,7 +112,7 @@ arrowRight.addEventListener('click', function(){
     })
     .then(data => {
         console.log(data.nextFoodId);
-        window.location.href = `/game/flashcard/play?user=${data.nextUsername}&id=${data.nextFoodId}`;
+        window.location.href = `/game/flashcard/play?id=${data.nextFoodId}`;
     })
     .catch(error => {
         console.error('Error:', error);
@@ -123,7 +121,7 @@ arrowRight.addEventListener('click', function(){
 
 // //左矢印をクリックしたら前のカードへうつる
 arrowLeft.addEventListener('click', function(){
-    fetch(`/game/flashcard/getPreviousFood?user=${username}&foodId=${foodId}`, {
+    fetch(`/game/flashcard/getPreviousFood?foodId=${foodId}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
     })
@@ -136,8 +134,7 @@ arrowLeft.addEventListener('click', function(){
     })
     .then(data => {
         console.log(data.previousFoodId);
-        console.log(data.previousUsername);
-        window.location.href = `/game/flashcard/play?user=${data.previousUsername}&id=${data.previousFoodId}`;
+        window.location.href = `/game/flashcard/play?id=${data.previousFoodId}`;
     })
     .catch(error => {
         console.error('Error:', error);

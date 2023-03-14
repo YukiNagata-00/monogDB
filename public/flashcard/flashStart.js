@@ -15,6 +15,17 @@
         })
     });
 
+    let basic = document.getElementById("basicBtn")
+    basic.addEventListener('click', function () {
+        fetch('/game/flashcard/getStartId')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data._id)
+            console.log(data.username)
+            window.location.href = `/game/flashcard/play?user=${data.username}&id=${data._id}`;
+        })
+    });
+
     let favorite = document.getElementById("favoriteBtn")
     favorite.addEventListener('click', function () {
         window.location.href = '/game/flashcard/favorite';

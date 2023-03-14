@@ -37,7 +37,7 @@ function showCard(){
         console.log('foodData is undefined');
         return;
     }
-    foodName.innerText =foodData.name ;
+    foodName.innerText =foodData.foodname ;
     ura.innerText =foodData.carbo ;
     foodImg.src = '/images/foods/' + foodData.image; 
 

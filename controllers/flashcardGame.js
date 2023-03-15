@@ -16,6 +16,9 @@ const storage = multer.diskStorage({
   const upload = multer({storage});
 var path = require('path');
 
+
+
+
 const getfavoritePage = (req, res, next) =>{
     res.sendFile(path.join(__dirname, '../public', '/flashcard/favorite.html'));
 }
@@ -49,6 +52,9 @@ const getAddCard =  (req, res) => {
 const getPlay = (req, res, next) =>{
     res.sendFile(path.join(__dirname, '../public', '/flashcard/flashcard.html'));
 }
+const allFlashcard = (req, res, next) =>{
+    res.sendFile(path.join(__dirname, '../public', '/flashcard/allflashcard.html'));
+}
 
 const addCardpage = (req, res, next) =>{
     res.sendFile(path.join(__dirname, '../public', '/flashcard/addFlashcard.html'));
@@ -60,13 +66,13 @@ const addCard2 =
     async(req, res) =>{
 
         try{
-            //ユーザーの新規作成
-            const add = await AddCard.create(req.body);
-            const user = await User.findById(req.body.userId);
+            const add = await Food.create(req.body);
+            const user = await User.findById(req.body.username);
             console.log(user)
+            
             const addId = add._id
             console.log(addId)
-            await User.findByIdAndUpdate({_id : req.body.userId}, {$push: {addcards: addId}});
+            await User.findByIdAndUpdate({_id : req.body.username}, { $push : {addcards: addId}});
             res.send('カードを追加しました');
 
         }catch(err){
@@ -119,16 +125,6 @@ const updateFavorite = async(req, res) => {
     }
 }
 
-const getStartallId = (req, res)=>{
-    Food.findOne({}, '_id', ).sort({_id: 1}).exec((error, food)=>{
-        if (error) {
-            console.log(error);
-            res.status(500).send({ error: 'An error occurred' });
-        }
-        res.json(food);
-    })
-}
-
 //基本カードのidのみ
 const getStartId = (req, res)=>{
     Food.findOne({username:"all"}).sort({_id: 1}).exec((error, food)=>{
@@ -139,6 +135,8 @@ const getStartId = (req, res)=>{
         res.json(food);
     })
 }
+
+//useridカードを探してくる。
 const getOneFood = (req, res) => {
     const foodId = req.query.foodId;
     Food.findById(foodId).exec((error, food) => {
@@ -146,9 +144,11 @@ const getOneFood = (req, res) => {
         console.log(error);
         res.status(500).send({ error: 'An error occurred' });
     }
+    console.log(food)
         res.json(food);
     });
 };
+
 
 const getNextFood = async(req, res) =>{
     const foodId = req.query.foodId;
@@ -169,6 +169,41 @@ const getPreviousFood = async(req, res) =>{
     res.status(200).send({ previousFoodId: previousFood._id ,previousUsername: previousFood.username});
 }
 
+//全てのカードを探してくる
+const getStartAllId = async(req, res)=>{
+    console.log("success");
+    const type = await req.body.username
+    Food.findOne({ $or:[ {username : "all"}, {username : type } ] } ).sort({_id: 1}).exec((error, food)=>{
+        if (error) {
+            console.log(error);
+            res.status(500).send({ error: 'An error occurred' });
+        }
+        console.log(food)
+        res.json(food);
+    })
+}
+
+
+const getNextFood2 = async(req, res) =>{
+    const foodId = req.query.foodId;
+    const nextFood = await Food.findOne({ $or:[ {username : "all"}, {username : type } ] },{$and :[{_id: { $gt: foodId }}]} );
+    if (!nextFood) {
+        res.status(404).send('Next food not found');
+        return;
+    }
+    res.status(200).send({ nextFoodId: nextFood._id , nextUsername: nextFood.username});
+}
+
+const getPreviousFood2 = async(req, res) =>{
+    const foodId = req.query.foodId;
+    const previousFood = await Food.findOne({username: "all", _id: { $lt: foodId } }).sort({ _id: -1 });
+    if (!previousFood) {
+        res.status(404).send('Next food not found');
+        return;
+    }
+    res.status(200).send({ previousFoodId: previousFood._id ,previousUsername: previousFood.username});
+}
+
 
 
 module.exports = {
@@ -179,13 +214,16 @@ module.exports = {
     getFood,
     getAddCard,
     getPlay,
+    allFlashcard,
     addCardpage,
     // getResult,
     addCard2,
     updateFavorite,
     addImage,
     getStartId,
+    getStartAllId,
     getOneFood,
     getNextFood,
-    getPreviousFood
+    getPreviousFood,
+    getNextFood2,
 };

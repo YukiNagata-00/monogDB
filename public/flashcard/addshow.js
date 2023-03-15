@@ -40,7 +40,28 @@ let token = localStorage.getItem('jwtToken');
         console.error('Error:', error);
     });
 
-
+    function getOneFood(foodId){
+        fetch(`/game/flashcard/getOneFood?foodId=${foodId}`, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            foodData = data;
+            console.log(foodData);
+            showCard();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+    
+    
 
 // //カードを表示させる機能
 function showCard(){

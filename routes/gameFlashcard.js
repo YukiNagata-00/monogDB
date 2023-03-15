@@ -19,31 +19,37 @@ const {
     getStart,
     getFood,
     getPlay,
+    allFlashcard,
     getAddCard,
     addCardpage,
     addCard2,
     updateFavorite,
     addImage,
     getStartId,
+    getStartAllId,
     getOneFood,
     getNextFood,
     getPreviousFood,
+    getNextFood2
   //  getAllFood
 } = require('../controllers/flashcardGame');
 router.get('/favorite', getfavoritePage)
 router.get('/adds', getaddshowpage)
+router.post('/getStartAllId',  getStartAllId)
 router.get('/getStartId', getStartId)
 router.get('/getNextFood', getNextFood)
 router.get('/getOneFood', getOneFood)
 router.get('/getPreviousFood', getPreviousFood)
 router.get('/start', getStart);
 router.get('/getFood', getFood);
+router.get('/all', allFlashcard);
 router.get('/play', getPlay);
 router.get('/getAddCard', getAddCard);
 router.get('/addcard', addCardpage);
 router.post('/addcard2', addCard2);
 router.post('/updateFavorite',updateFavorite)
 router.post('/addImage', upload.single("image"), addImage);
+router.get('/getNextFood2', getNextFood2)
 //router.post('/allfood',getALLFood)
 
 module.exports = router;

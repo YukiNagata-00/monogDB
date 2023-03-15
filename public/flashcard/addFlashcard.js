@@ -109,7 +109,7 @@ addBtn.addEventListener('click', async function (e){
         carbo = carbo.value;
         console.log(imageinput);
         console.log(user.user._id)
-        
+        let username = user.user._id
 
         try{
             foodname = foodname.value;
@@ -119,7 +119,7 @@ addBtn.addEventListener('click', async function (e){
                     foodname,
                     image,
                     carbo,
-                    userId: user.user._id
+                    username
     
                 }),
                 headers: {
@@ -136,8 +136,6 @@ addBtn.addEventListener('click', async function (e){
         
                 });
 
-    
-            
             if(res.ok){
                 const data = await res.json();
                 console.log('Registration successful', data);

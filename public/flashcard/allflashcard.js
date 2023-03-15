@@ -1,6 +1,7 @@
 let user;
 const params = window.location.search;
 const foodId = new URLSearchParams(params).get("id");
+const username = new URLSearchParams(params).get("user");
 
 console.log(user);
 let foodData;
@@ -12,9 +13,13 @@ let ura = document.getElementById("ura");
 let heart = document.getElementById("heart");
 
 
-function getOneFood(){
-    fetch(`/game/flashcard/getOneFood?foodId=${foodId}`, {
-        method: 'GET',
+function getOneFood(username){
+    fetch(`/game/flashcard/getOneFood?user=${username}&foodId=${foodId}`, {
+        method: 'POST',
+        body :JSON.stringify({
+            type: user.user._id
+
+        }),
         headers: { 'Content-Type': 'application/json' }
     })
     .then(response => {
@@ -71,7 +76,7 @@ let token = localStorage.getItem('jwtToken');
     .then(data => {
         user =data;
         console.log(user)
-        getOneFood();
+        getOneFood(username);
         
     })
     .catch(error => {
@@ -99,7 +104,7 @@ back.addEventListener('click', function () {
 
 // //右矢印をクリックしたら次のカードへうつる
 arrowRight.addEventListener('click', function(){
-    fetch(`/game/flashcard/getNextFood?foodId=${foodId}`, {
+    fetch(`/game/flashcard/getNextFood2?$user=${username}&foodId=${foodId}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' }
     })
@@ -112,7 +117,7 @@ arrowRight.addEventListener('click', function(){
     })
     .then(data => {
         console.log(data.nextFoodId);
-        window.location.href = `/game/flashcard/play?id=${data.nextFoodId}`;
+        window.location.href = `/game/flashcard/play?user=${username}&id=${data.nextFoodId}`;
     })
     .catch(error => {
         console.error('Error:', error);

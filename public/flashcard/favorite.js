@@ -10,6 +10,36 @@ let arrowLeft = document.getElementById("arrow-left");
 let foodName = document.getElementById("foodName");
 let ura = document.getElementById("ura");
 
+//ログイン中のユーザー情報取得
+let token = localStorage.getItem('jwtToken');
+
+    fetch('/auth/verify-token', {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            localStorage.removeItem("jwtToken");
+            window.location.href = "intro";
+        }
+        return response.json();
+    })
+    .then(data => {
+        user =data;
+        console.log(user)
+        let foodId = user.user.favorites[foodIndex];
+        console.log(foodId)
+        getOneFood(foodId);
+        
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+
+
 function getOneFood(foodId){
     fetch(`/game/flashcard/getOneFood?foodId=${foodId}`, {
         method: 'GET',
@@ -60,90 +90,20 @@ back.addEventListener('click', function () {
 // //右矢印をクリックしたら次のカードへうつる
 arrowRight.addEventListener('click', function(){
  foodIndex += 1;
- fetch('/auth/verify-token', {
-    method: 'POST',
-    headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-    }
-})
-.then(response => {
-    if (!response.ok) {
-        localStorage.removeItem("jwtToken");
-        window.location.href = "intro";
-    }
-    return response.json();
-})
-.then(data => {
-    user =data;
-    console.log(user)
-    let foodId = user.user.favorites[foodIndex];
-    console.log(foodId)
-    getOneFood(foodId);
-    
-})
-.catch(error => {
-    console.error('Error:', error);
-});
+ let foodId = user.user.favorites[foodIndex];
+ console.log(foodId)
+ getOneFood(foodId);
+
 });
 
 // //左矢印をクリックしたら前のカードへうつる
 arrowLeft.addEventListener('click', function(){
     foodIndex -= 1;
- fetch('/auth/verify-token', {
-    method: 'POST',
-    headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-    }
-})
-.then(response => {
-    if (!response.ok) {
-        localStorage.removeItem("jwtToken");
-        window.location.href = "intro";
-    }
-    return response.json();
-})
-.then(data => {
-    user =data;
-    console.log(user)
     let foodId = user.user.favorites[foodIndex];
     console.log(foodId)
     getOneFood(foodId);
-    
-})
-.catch(error => {
-    console.error('Error:', error);
-});
+ 
 });
 
-//ログイン中のユーザー情報取得
-let token = localStorage.getItem('jwtToken');
-
-    fetch('/auth/verify-token', {
-        method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => {
-        if (!response.ok) {
-            localStorage.removeItem("jwtToken");
-            window.location.href = "intro";
-        }
-        return response.json();
-    })
-    .then(data => {
-        user =data;
-        console.log(user)
-        let foodId = user.user.favorites[foodIndex];
-        console.log(foodId)
-        getOneFood(foodId);
-        
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
 
 

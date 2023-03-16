@@ -5,7 +5,7 @@ const AddCard = require("../models/AddCard")
 const multer = require("multer");
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, 'public/images/')
+      cb(null, 'public/images/addcards/')
     },
     filename: function (req, file, cb) {
         //const unixTime = new Date().getTime();
@@ -19,9 +19,7 @@ var path = require('path');
 const getfavoritePage = (req, res, next) =>{
     res.sendFile(path.join(__dirname, '../public', '/flashcard/favorite.html'));
 }
-const getaddshowpage = (req, res, next) =>{
-    res.sendFile(path.join(__dirname, '../public', '/flashcard/addshow.html'));
-}
+
 
 const getStart = (req, res, next) =>{
     res.sendFile(path.join(__dirname, '../public', '/flashcard/flashStart.html'));
@@ -46,21 +44,21 @@ const getAddCard =  (req, res) => {
         res.json(addcard);
     });
 };
+
 const getPlay = (req, res, next) =>{
     res.sendFile(path.join(__dirname, '../public', '/flashcard/flashcard.html'));
 }
 
+//カードを追加するページへの移動
 const addCardpage = (req, res, next) =>{
     res.sendFile(path.join(__dirname, '../public', '/flashcard/addFlashcard.html'));
 };
 
 const addCard2 =
-    //body('foodname').isLength({min: 1, max: 25 }).withMessage('食べ物名は１~25文字にしてください'),
-
+   
     async(req, res) =>{
 
         try{
-            //ユーザーの新規作成
             const add = await AddCard.create(req.body);
             const user = await User.findById(req.body.userId);
             console.log(user)
@@ -76,11 +74,6 @@ const addCard2 =
 
 //フラッシュカードの写真imageのアップロード
     const addImage =
-        // //バリデーション　
-        // body('foodname').isLength({min: 1, max: 25 }).withMessage('ユーザー名は１~25文字にしてください'),
-        // body('iamge').isEmail().withMessage('正しいメールアドレスを入力してください'),
-        // body('carbo').isLength({min: 5, max: 20 }).withMessage('パスワードは5~20文字にしてください'),
-
         //カードの追加
         async(req, res) =>{
             console.log("addImage")
@@ -119,15 +112,7 @@ const updateFavorite = async(req, res) => {
     }
 }
 
-const getStartallId = (req, res)=>{
-    Food.findOne({}, '_id', ).sort({_id: 1}).exec((error, food)=>{
-        if (error) {
-            console.log(error);
-            res.status(500).send({ error: 'An error occurred' });
-        }
-        res.json(food);
-    })
-}
+
 
 //基本カードのidのみ
 const getStartId = (req, res)=>{
@@ -141,6 +126,8 @@ const getStartId = (req, res)=>{
 }
 const getOneFood = (req, res) => {
     const foodId = req.query.foodId;
+    console.log(foodId);
+  
     Food.findById(foodId).exec((error, food) => {
         if (error) {
         console.log(error);
@@ -168,7 +155,22 @@ const getPreviousFood = async(req, res) =>{
     }
     res.status(200).send({ previousFoodId: previousFood._id ,previousUsername: previousFood.username});
 }
-
+//追加カードを表示させるページへの移動
+const getaddshowpage = (req, res, next) =>{
+    res.sendFile(path.join(__dirname, '../public', '/flashcard/addshow.html'));
+}
+//追加カードのIDを探して、データを取って来る
+const getOneAddFood = (req, res) => {
+    console.log("getaddfood");
+    const foodId = req.query.foodId;
+    AddCard.findById(foodId).exec((error, food) => {
+        if (error) {
+        console.log(error);
+        res.status(500).send({ error: 'An error occurred' });
+    }
+        res.json(food);
+    });
+};
 
 
 module.exports = {
@@ -187,5 +189,6 @@ module.exports = {
     getStartId,
     getOneFood,
     getNextFood,
-    getPreviousFood
+    getPreviousFood,
+    getOneAddFood
 };

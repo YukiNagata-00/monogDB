@@ -91,7 +91,7 @@ options.forEach(function (element) {
 
 //次の問題へ
 next.addEventListener('click', () => {
-    index += 2;
+    index += 1;
     if (index >= 5) {
         console.log('finish');
         console.log(result);

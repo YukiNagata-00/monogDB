@@ -110,6 +110,7 @@ addBtn.addEventListener('click', async function (e){
         console.log(imageinput);
         console.log(user.user._id)
         
+        
 
         try{
             foodname = foodname.value;
@@ -119,7 +120,7 @@ addBtn.addEventListener('click', async function (e){
                     foodname,
                     image,
                     carbo,
-                    userId: user.user._id
+            
     
                 }),
                 headers: {

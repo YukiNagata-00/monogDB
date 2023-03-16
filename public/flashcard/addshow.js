@@ -33,7 +33,7 @@ let token = localStorage.getItem('jwtToken');
         console.log(user)
         let foodId = user.user.addcards[foodIndex];
         console.log(foodId)
-        getOneFood(foodId);
+        getOneAddFood(foodId);
         
     })
     .catch(error => {
@@ -41,6 +41,28 @@ let token = localStorage.getItem('jwtToken');
     });
 
 
+
+
+function getOneAddFood(foodId){
+    fetch(`/game/flashcard/getOneAddFood?foodId=${foodId}`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        foodData = data;
+        console.log(foodData);
+        showCard();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
 
 // //カードを表示させる機能
 function showCard(){
@@ -50,7 +72,7 @@ function showCard(){
     }
     foodName.innerText =foodData.foodname ;
     ura.innerText =foodData.carbo ;
-    foodImg.src = '/images/foods/' + foodData.image; 
+    foodImg.src = '/images/addcards/' + foodData.image; 
 
 
 };
@@ -71,61 +93,31 @@ back.addEventListener('click', function () {
 // //右矢印をクリックしたら次のカードへうつる
 arrowRight.addEventListener('click', function(){
  foodIndex += 1;
- fetch('/auth/verify-token', {
-    method: 'POST',
-    headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-    }
-})
-.then(response => {
-    if (!response.ok) {
-        localStorage.removeItem("jwtToken");
-        window.location.href = "intro";
-    }
-    return response.json();
-})
-.then(data => {
-    user =data;
-    console.log(user)
-    let foodId = user.user.addcards[foodIndex];
-    console.log(foodId)
-    getOneFood(foodId);
-    
-})
-.catch(error => {
-    console.error('Error:', error);
-});
+ if(foodIndex === user.user.addcards.length ){
+    foodName.innerText ="全部チェックしたよ";
+    foodImg.src = '/images/addcards/ome.jpg'; 
+}else{
+ let foodId = user.user.addcards[foodIndex];
+ console.log(foodIndex)
+ getOneAddFood(foodId);
+}
+
+
+ 
+
+
+ console.log(user.user.addcards)
+ 
 });
 
 // //左矢印をクリックしたら前のカードへうつる
 arrowLeft.addEventListener('click', function(){
     foodIndex -= 1;
- fetch('/auth/verify-token', {
-    method: 'POST',
-    headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-    }
-})
-.then(response => {
-    if (!response.ok) {
-        localStorage.removeItem("jwtToken");
-        window.location.href = "intro";
-    }
-    return response.json();
-})
-.then(data => {
-    user =data;
-    console.log(user)
     let foodId = user.user.addcards[foodIndex];
-    console.log(foodId)
-    getOneFood(foodId);
-    
-})
-.catch(error => {
-    console.error('Error:', error);
+    console.log(foodIndex)
+    getOneAddFood(foodId);
+
 });
-});
+
 
 

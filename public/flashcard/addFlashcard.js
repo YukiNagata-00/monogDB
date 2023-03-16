@@ -34,13 +34,13 @@ function errorfunction(){
     if(imageEx.value === ""){
        error1 ++; 
     }
-    if(carbo.value === "" ){
-       error2++
-    }
-    if( carbo.value.match(/^[0-9]+$/) !== "true"){
+    // if(carbo.value === "" ){
+    //    error2++
+    // }
+    if( String(carbo.value).match(/^[0-9]+$/) === false){
         error3++
      }
-    console.log(error)
+    console.log(error3)
 
 }
 
@@ -92,13 +92,13 @@ addBtn.addEventListener('click', async function (e){
     }if (error1 >0){
         imageError.innerHTML = '写真をアップロードしよう！'
 
-    }if (error2 > 0){
+    // }if (error2 > 0){
         
-        carboError.innerHTML = 'カーボ数を入力しよう'
+    //     carboError.innerHTML = 'カーボ数を入力しよう'
+    }if(error3 > 0){
+        carboError.innerHTML = '半角で入力しよう'
 
-    
-
-    }else{
+    }if(error === 0 & error1===0 & error3===0){
         //inputに入ったファイルを取得
         const file = await imageinput.files[0];
         //サーバーエンドに送信するための形式が
@@ -109,6 +109,7 @@ addBtn.addEventListener('click', async function (e){
         carbo = carbo.value;
         console.log(imageinput);
         console.log(user.user._id)
+        let usernoId = user.user._id
         
         
 
@@ -120,6 +121,7 @@ addBtn.addEventListener('click', async function (e){
                     foodname,
                     image,
                     carbo,
+                    usernoId
             
     
                 }),
@@ -127,7 +129,7 @@ addBtn.addEventListener('click', async function (e){
                     'Content-Type': 'application/json'
                 },
             });
-            console.log(res);
+            console.log(res.ok);
             
             const addcardimage =
                 await fetch('/game/flashcard/addImage', {
@@ -139,12 +141,16 @@ addBtn.addEventListener('click', async function (e){
 
     
             
-            if(res.ok){
+            if(res.ok === true){
                 const data = await res.json();
                 console.log('Registration successful', data);
                 //なぜか効かないアラート
                alert("追加しました");
+               clearAll();
+               window.location.href = '/game/flashcard/addcard';
+
                tuika.innerHTML= "追加しました"
+
     
                
             }else{

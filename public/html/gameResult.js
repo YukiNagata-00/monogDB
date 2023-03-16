@@ -57,7 +57,7 @@ card.addEventListener('click', function () {
 
 function updateCard() {
     showFront()
-    foodName.innerText = incorrect[index].name;
+    foodName.innerText = incorrect[index].foodname;
     foodImg.src = '/images/foods/' + incorrect[index].image;
 }
 

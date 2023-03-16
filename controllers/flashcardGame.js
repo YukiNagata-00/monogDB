@@ -60,12 +60,13 @@ const addCard2 =
 
         try{
             const add = await AddCard.create(req.body);
-            const user = await User.findById(req.body.userId);
+            const user = await User.findById(req.body.usernoId);
             console.log(user)
+            console.log(add)
             const addId = add._id
             console.log(addId)
-            await User.findByIdAndUpdate({_id : req.body.userId}, {$push: {addcards: addId}});
-            res.send('カードを追加しました');
+            await User.findByIdAndUpdate({_id : req.body.usernoId}, {$push: {addcards: addId}});
+            res.send(add);
 
         }catch(err){
             return res.status(500).json(err);
@@ -161,7 +162,6 @@ const getaddshowpage = (req, res, next) =>{
 }
 //追加カードのIDを探して、データを取って来る
 const getOneAddFood = (req, res) => {
-    console.log("getaddfood");
     const foodId = req.query.foodId;
     AddCard.findById(foodId).exec((error, food) => {
         if (error) {

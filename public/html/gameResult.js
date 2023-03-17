@@ -9,10 +9,21 @@ const carb = document.getElementById('carbNum')
 carb.hidden = true;
 let index = 0;
 const foodName = document.getElementById('foodName')
-const foodImg = document.getElementById('foodImg')
+const foodImg = document.getElementById('foodImg') 
 const card = document.getElementById('card')
+const card2 = document.getElementById('card2')
+const nextBtn = document.getElementById('navi')
 const incorrect = JSON.parse(localStorage.getItem('incorrect'));
-updateCard();
+card2.hidden= true;
+if(incorrect.length == 0){
+    nextBtn.hidden= true;
+    card.hidden= true;
+    card2.hidden= false;
+
+}else{
+    updateCard(); 
+}
+
 
 fetch(`/game/${selectString}/score`)
     .then(response => response.json())
